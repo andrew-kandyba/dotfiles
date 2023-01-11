@@ -1,7 +1,7 @@
 [user]
     name = Andrew Kandyba
     email = andrew.kandyba@gmail.com
-    signingkey = C82F2B87CACE1C93
+    signingkey = 323AF0E60BB01492
 [core]
     autocrlf = input
 [merge]
