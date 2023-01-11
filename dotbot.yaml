@@ -1,0 +1,19 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- create:
+  - ~/.config
+
+- link:
+    ~/.config/nvim: nvim
+
+- shell:
+  - mkdir -p ~/.bin
+  - [make .install-git-submodules, Installing submodules]
+  - [make .install-brew, Installing homebrew]
+  - [make .install-oh-my-zsh, Installing oh-my-zsh]
+  - [make .install-ansible, Installing ansible]
+
