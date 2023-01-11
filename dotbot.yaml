@@ -9,6 +9,8 @@
 
 - link:
     ~/.config/nvim: nvim
+    ~/.gitconfig: git/.gitconfig
+    ~/.gitignore: git/.gitignore
 
 - shell:
   - mkdir -p ~/.bin

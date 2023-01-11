@@ -1,0 +1,15 @@
+[user]
+    name = Andrew Kandyba
+    email = andrew.kandyba@gmail.com
+    signingkey = C82F2B87CACE1C93
+[core]
+    autocrlf = input
+[merge]
+    conflictstyle = diff3
+    ff = false
+[push]
+    default = current
+[init]
+    defaultBranch = master
+[commit]
+    gpgsign = true
