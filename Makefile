@@ -4,6 +4,8 @@ DOTBOT_CONFIG := "$(PWD)/dotbot.yaml"
 
 BASEDIR := "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+.DEFAULT_GOAL := run-dotbot
+
 run-dotbot: ## Run dotbot
 	@cd "${BASEDIR}"
 	@git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
@@ -19,7 +21,8 @@ run-dotbot: ## Run dotbot
 
 .install-oh-my-zsh:
 	@[ ! -d ~/.oh-my-zsh ] && curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | /bin/bash || exit 0;
+	@ln -sf $(PWD)/oh-my-zsh/themes/unicorn.zsh-theme ~/.oh-my-zsh/themes/unicorn.zsh-theme
+	@ln -sf $(PWD)/oh-my-zsh/.zshrc ~/.zshrc
 
 .install-ansible:
 	@[ ! -f "`which ansible`" ] && brew install ansible || exit 0;
-

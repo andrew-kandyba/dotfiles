@@ -13,9 +13,23 @@
     ~/.gitignore: git/.gitignore
 
 - shell:
-  - mkdir -p ~/.bin
-  - [make .install-git-submodules, Installing submodules]
-  - [make .install-brew, Installing homebrew]
-  - [make .install-oh-my-zsh, Installing oh-my-zsh]
-  - [make .install-ansible, Installing ansible]
-
+  -
+    command: make .install-git-submodules
+    description: Installing submodules
+    stdin: true
+    stdout: true
+  -
+    command: make .install-brew
+    description: Installing homebrew
+    stdin: true
+    stdout: true
+  -
+    command: make .install-oh-my-zsh
+    description: Installing oh-my-zsh
+    stdin: true
+    stdout: true
+  -
+    command: make .install-ansible
+    cescription: Installing ansible
+    stdin: true
+    stdout: true
