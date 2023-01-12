@@ -1,5 +1,5 @@
 ---
-homebrew_packages:
+localhost_homebrew_packages:
   - ansible-lint
   - bfg
   - ctop
