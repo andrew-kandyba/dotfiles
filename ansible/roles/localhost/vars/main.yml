@@ -13,8 +13,17 @@ localhost_homebrew_packages:
   - jsonlint
   - k6
   - mkcert
+  - molecule
   - neovim
   - ripgrep
   - trivy
   - trufflesecurity/trufflehog/trufflehog
   - yamllint
+
+localhost_homebrew_cask_packages:
+  - 1password
+  - deepl
+  - docker
+  - ngrok
+  - vagrant
+  - virtualbox
