@@ -30,6 +30,11 @@
     stdout: true
   -
     command: make .install-ansible
-    cescription: Installing ansible
+    description: Installing ansible
+    stdin: true
+    stdout: true
+  -
+    command: make .run-playbook
+    description: Running playbook
     stdin: true
     stdout: true

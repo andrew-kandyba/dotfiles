@@ -4,9 +4,9 @@ DOTBOT_CONFIG := "$(PWD)/dotbot.yaml"
 
 BASEDIR := "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-.DEFAULT_GOAL := run-dotbot
+.DEFAULT_GOAL := run
 
-run-dotbot: ## Run dotbot
+run: ## Run dotbot
 	@cd "${BASEDIR}"
 	@git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 	@git submodule update --init --recursive "${DOTBOT_DIR}"
@@ -26,3 +26,6 @@ run-dotbot: ## Run dotbot
 
 .install-ansible:
 	@[ ! -f "`which ansible`" ] && brew install ansible || exit 0;
+
+.run-playbook:
+	@cd $(PWD)/ansible && ansible-playbook --connection=local --inventory 127.0.0.1, local.yml
