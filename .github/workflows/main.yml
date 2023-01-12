@@ -21,6 +21,6 @@ jobs:
         with:
           molecule_command: test
           molecule_args: -d docker
-          molecule_working_dir: ${{ github.workspace }}/andrew-kandyba/sandbox/ansible/roles/localhost/molecule
+          molecule_working_dir: ${{ github.workspace }}/andrew-kandyba/sandbox/ansible/roles/localhost
         env:
           ANSIBLE_FORCE_COLOR: '1'
