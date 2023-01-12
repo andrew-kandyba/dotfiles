@@ -4,6 +4,7 @@ localhost_homebrew_packages:
   - bfg
   - ctop
   - dive
+  - docker-slim
   - fd
   - git
   - git-secrets

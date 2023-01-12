@@ -3,3 +3,8 @@
     homebrew:
       name: "{{ localhost_homebrew_packages }}"
       state: present
+
+#   - name: Ensure graphical utils are installed
+#     homebrew_cask:
+#       name: "{{ localhost_homebrew_cask_packages }}"
+#       state: present
