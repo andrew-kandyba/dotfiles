@@ -1,0 +1,20 @@
+---
+homebrew_packages:
+  - ansible-lint
+  - bfg
+  - ctop
+  - dive
+  - fd
+  - git
+  - git-secrets
+  - gnupg
+  - hadolint
+  - htop
+  - jsonlint
+  - k6
+  - mkcert
+  - neovim
+  - ripgrep
+  - trivy
+  - trufflesecurity/trufflehog/trufflehog
+  - yamllint

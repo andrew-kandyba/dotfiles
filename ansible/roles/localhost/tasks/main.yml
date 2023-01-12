@@ -1,0 +1,5 @@
+---
+  - name: Ensure console utils are installed
+    homebrew:
+      name: "{{ homebrew_packages }}"
+      state: present
