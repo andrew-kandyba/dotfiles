@@ -17,7 +17,7 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - run: |
-          echo ${{ github.workspace }} && ls -la
+          echo ${{ github.workspace }} && ls -la andrew-kandyba
       - name: Molecule
         uses: gofrolist/molecule-action@v2
         with:
