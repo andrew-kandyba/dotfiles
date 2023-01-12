@@ -1,1 +1,1 @@
-$HOME sweet $HOME
+# .dotfiles
