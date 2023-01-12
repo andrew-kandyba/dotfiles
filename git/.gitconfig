@@ -4,6 +4,7 @@
     signingkey = 323AF0E60BB01492
 [core]
     autocrlf = input
+    excludesfile = ~/.gitignore
 [merge]
     conflictstyle = diff3
     ff = false
