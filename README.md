@@ -6,7 +6,7 @@ Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
 ## :green_apple: Installation
 
 ```sh
-> git@github.com:andrew-kandyba/sandbox.git .dotfiles
+> git clone git@github.com:andrew-kandyba/dotfiles.git .dotfiles
 > cd .dotfiles
 
 > make run
