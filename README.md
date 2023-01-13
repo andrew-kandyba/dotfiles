@@ -8,8 +8,6 @@ Bootstrap is based on the awesome [dotbot](https://github.com/anishathalye/dotbo
 
 
 [make](https://www.gnu.org/software/make/)    
-[molecule](https://github.com/ansible-community/molecule) + docker driver [only for testing]
-
 
 ## :unicorn: Installation
 
@@ -19,16 +17,3 @@ Bootstrap is based on the awesome [dotbot](https://github.com/anishathalye/dotbo
 
 > make run
 ```
-         
-## 🤞🏻 Testing
-
-To run tests that require [molecula](https://github.com/ansible-community/molecule) with docker driver installed.    
-Please use `make test` for executing tests.    
-
-```sh
-> cd .dotfiles
-
-> make test
-```
-     
-**_! Executing the test script may take some time._**
