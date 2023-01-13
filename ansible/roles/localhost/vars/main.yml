@@ -1,6 +1,7 @@
 ---
 localhost_homebrew_packages:
   - ansible-lint
+  - bat
   - bfg
   - ctop
   - dive
