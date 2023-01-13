@@ -1,15 +1,12 @@
 # .dotfiles (WIP)
-[![Molecula](https://github.com/andrew-kandyba/sandbox/actions/workflows/main.yml/badge.svg)](https://github.com/andrew-kandyba/sandbox/actions/workflows/main.yml)
 
 This is a repo for my OS X dotfiles.
-Bootstrap is based on the awesome [dotbot](https://github.com/anishathalye/dotbot).
+Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
 
-## :teddy_bear: Require
-
-
+## :apple: Require
 [make](https://www.gnu.org/software/make/)    
 
-## :unicorn: Installation
+## :green_apple: Installation
 
 ```sh
 > git@github.com:andrew-kandyba/sandbox.git .dotfiles
