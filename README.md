@@ -1,10 +1,7 @@
 # .dotfiles (WIP)
 
 This is a repo for my OS X dotfiles.
-Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
-
-## :apple: Require
-[make](https://www.gnu.org/software/make/)    
+Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).   
 
 ## :green_apple: Installation
 
