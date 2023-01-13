@@ -2,11 +2,8 @@ name: Molecule
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    paths:
+      - ansible/**
 
 jobs:
   molecule:
