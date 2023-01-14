@@ -1,10 +1,20 @@
 ---
-  - name: Ensure console utils are installed
+  - name: Installing homebrew packages
     homebrew:
       name: "{{ localhost_homebrew_packages }}"
       state: present
 
-  - name: Ensure graphical utils are installed
+  - name: Installing homebrew repos
+    homebrew_tap:
+      name: "{{ localhost_homebrew_repos }}"
+      state: present
+
+  - name: Installing homebrew cask packages
     homebrew_cask:
       name: "{{ localhost_homebrew_cask_packages }}"
+      state: present
+
+  - name: Installing fonts
+    homebrew_cask:
+      name: "{{ localhost_fonts }}"
       state: present

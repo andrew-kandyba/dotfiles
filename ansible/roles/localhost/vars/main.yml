@@ -22,10 +22,17 @@ localhost_homebrew_packages:
   - trufflesecurity/trufflehog/trufflehog
   - yamllint
 
+localhost_homebrew_repos:
+  - homebrew/cask-fonts
+
 localhost_homebrew_cask_packages:
   - 1password
   - deepl
   - docker
+  - kitty
   - ngrok
   - vagrant
   - virtualbox
+
+localhost_fonts:
+  - font-fira-code

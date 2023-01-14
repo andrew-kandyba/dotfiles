@@ -38,3 +38,4 @@
     description: Running playbook
     stdin: true
     stdout: true
+    stderr: true
