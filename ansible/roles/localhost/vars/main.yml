@@ -18,6 +18,7 @@ localhost_homebrew_packages:
   - molecule
   - neovim
   - ripgrep
+  - tmux
   - trivy
   - trufflesecurity/trufflehog/trufflehog
   - yamllint
@@ -33,6 +34,7 @@ localhost_homebrew_cask_packages:
   - ngrok
   - vagrant
   - virtualbox
+  - zoom
 
 localhost_fonts:
   - font-fira-code-nerd-font
