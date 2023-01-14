@@ -1,42 +1,28 @@
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+local o = vim.opt
 
-vim.opt.smartindent = true
-vim.opt.wrap = false
-
-vim.opt.number = true
-vim.opt.relativenumber = true
-
-vim.opt.wildmode = 'longest:full,full' -- complete the longest common match, and allow tabbing the results to fully complete them
-vim.opt.completeopt = 'menuone,longest,preview'
-
-vim.opt.title = true
-vim.opt.mouse = 'a' -- enable mouse for all modes
-
-vim.opt.termguicolors = true
-
-vim.opt.spell = true
-
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
-vim.opt.list = true -- enable the below listchars
-vim.opt.listchars = { tab = '▸ ', trail = '·' }
-vim.opt.fillchars:append({ eob = ' ' }) -- remove the ~ from end of buffer
-
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
-
-vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
-
-vim.opt.confirm = true -- ask for confirmation instead of erroring
-
-vim.opt.undofile = true -- persistent undo
-vim.opt.backup = true -- automatically save a backup file
-vim.opt.backupdir:remove('.') -- keep backups out of the current directory
-
+o.backup = false
+o.clipboard = 'unnamedplus'
+o.completeopt = 'menuone,longest,preview'
+o.confirm = true
+o.expandtab = true
+o.fillchars:append({ eob = ' ' })
+o.ignorecase = true
+o.list = true
+o.listchars = { tab = '▸ ', trail = '·' }
+o.number = true
+o.relativenumber = true
+o.scrolloff = 8
+o.shiftwidth = 4
+o.sidescrolloff = 8
+o.smartcase = true
+o.smartindent = true
+o.softtabstop = 4
+o.spell = true
+o.splitbelow = true
+o.splitright = true
+o.tabstop = 4
+o.termguicolors = true
+o.title = true
+o.undofile = true
+o.wildmode = 'longest:full,full'
+o.wrap = false
