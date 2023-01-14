@@ -35,4 +35,4 @@ localhost_homebrew_cask_packages:
   - virtualbox
 
 localhost_fonts:
-  - font-fira-code
+  - font-fira-code-nerd-font

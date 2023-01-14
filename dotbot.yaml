@@ -9,6 +9,7 @@
 
 - link:
     ~/.config/nvim: nvim
+    ~/.config/kitty: kitty
     ~/.gitconfig: git/.gitconfig
     ~/.gitignore: git/.gitignore
 
@@ -18,21 +19,25 @@
     description: Installing submodules
     stdin: true
     stdout: true
+    stderr: true
   -
     command: make .install-brew
     description: Installing homebrew
     stdin: true
     stdout: true
+    stderr: true
   -
     command: make .install-oh-my-zsh
     description: Installing oh-my-zsh
     stdin: true
     stdout: true
+    stderr: true
   -
     command: make .install-ansible
     description: Installing ansible
     stdin: true
     stdout: true
+    stderr: true
   -
     command: make .run-playbook
     description: Running playbook
