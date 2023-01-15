@@ -25,6 +25,8 @@ Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
   - deepl
   - dive
   - docker
+  - docker (desktop)
+  - docker-compose
   - docker-slim
   - fd
   - font-fira-code-nerd-font
