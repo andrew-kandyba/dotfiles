@@ -57,22 +57,22 @@ Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
 #### Neovim
 
 ```
-'packer'
+  - packer
 
-'AndrewRadev/splitjoin.vim'
-'airblade/vim-rooter'
-'farmergreg/vim-lastplace'
-'jessarcher/vim-heritage'
-'karb94/neoscroll.nvim'
-'kyazdani42/nvim-tree.lua'
-'nelstrom/vim-visual-star-search'
-'nvim-telescope/telescope.nvim'
-'sheerun/vim-polyglot'
-'sickill/vim-pasta'
-'tpope/vim-commentary'
-'tpope/vim-repeat'
-'tpope/vim-sleuth'
-'tpope/vim-surround'
-'tpope/vim-unimpaired'
-'windwp/nvim-autopairs'
+  - AndrewRadev/splitjoin.vim
+  - airblade/vim-rooter
+  - farmergreg/vim-lastplace
+  - jessarcher/vim-heritage
+  - karb94/neoscroll.nvim
+  - kyazdani42/nvim-tree.lua
+  - nelstrom/vim-visual-star-search
+  - nvim-telescope/telescope.nvim
+  - sheerun/vim-polyglot
+  - sickill/vim-pasta
+  - tpope/vim-commentary
+  - tpope/vim-repeat
+  - tpope/vim-sleuth
+  - tpope/vim-surround
+  - tpope/vim-unimpaired
+  - windwp/nvim-autopairs
 ```
