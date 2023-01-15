@@ -18,3 +18,13 @@
     homebrew_cask:
       name: "{{ localhost_fonts }}"
       state: present
+
+  - name: Installing neovim plugins
+    shell:
+      chdir: "./../"
+      cmd: "make .install-neovim-plugins"
+
+  - name: Installing oh-my-zsh
+    shell:
+      chdir: "./../"
+      cmd: "make .install-oh-my-zsh"

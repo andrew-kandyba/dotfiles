@@ -27,12 +27,6 @@
     stdout: true
     stderr: true
   -
-    command: make .install-oh-my-zsh
-    description: Installing oh-my-zsh
-    stdin: true
-    stdout: true
-    stderr: true
-  -
     command: make .install-ansible
     description: Installing ansible
     stdin: true

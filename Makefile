@@ -19,6 +19,9 @@ run: ## Run dotbot
 .install-brew:
 	@[ ! -f "`which brew`" ] && sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | /bin/bash || exit 0;
 
+.install-neovim-plugins:
+	@[ -f "`which nvim`" ] && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' || exit 0;
+
 .install-oh-my-zsh:
 	@[ ! -d ~/.oh-my-zsh ] && curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | /bin/bash || exit 0;
 	@ln -sf $(PWD)/oh-my-zsh/themes/unicorn.zsh-theme ~/.oh-my-zsh/themes/unicorn.zsh-theme
