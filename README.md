@@ -11,3 +11,66 @@ Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
 
 > make run
 ```
+
+## :spiral_notepad: Contents
+
+```
+  - 1password
+  - ansible
+  - ansible-lint
+  - bat
+  - bfg
+  - brew
+  - ctop
+  - deepl
+  - dive
+  - docker
+  - docker-slim
+  - fd
+  - font-fira-code-nerd-font
+  - git
+  - git-secrets
+  - gnupg
+  - hadolint
+  - homebrew/cask-fonts
+  - htop
+  - jsonlint
+  - k6
+  - kitty
+  - mkcert
+  - molecule
+  - neovim
+  - ngrok
+  - oh-my-zsh
+  - ripgrep
+  - tmux
+  - trivy
+  - trufflesecurity/trufflehog/trufflehog
+  - vagrant
+  - virtualbox
+  - yamllint
+  - zoom
+```
+
+#### Neovim
+
+```
+'packer'
+
+'AndrewRadev/splitjoin.vim'
+'airblade/vim-rooter'
+'farmergreg/vim-lastplace'
+'jessarcher/vim-heritage'
+'karb94/neoscroll.nvim'
+'kyazdani42/nvim-tree.lua'
+'nelstrom/vim-visual-star-search'
+'nvim-telescope/telescope.nvim'
+'sheerun/vim-polyglot'
+'sickill/vim-pasta'
+'tpope/vim-commentary'
+'tpope/vim-repeat'
+'tpope/vim-sleuth'
+'tpope/vim-surround'
+'tpope/vim-unimpaired'
+'windwp/nvim-autopairs'
+```
