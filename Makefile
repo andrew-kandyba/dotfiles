@@ -2,15 +2,23 @@ DOTBOT_DIR := "$(PWD)/dotbot"
 DOTBOT_BIN := "bin/dotbot"
 DOTBOT_CONFIG := "$(PWD)/dotbot.yaml"
 
+PLAYBOOK := "$(PWD)/ansible/local.yml"
 BASEDIR := "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-.DEFAULT_GOAL := run
+.PHONY := help
+.DEFAULT_GOAL := help
 
-run: ## Run dotbot
+help:
+	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-27s[0m %s\n", $$1, $$2}'
+
+run: ## Run setup
 	@cd "${BASEDIR}"
 	@git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 	@git submodule update --init --recursive "${DOTBOT_DIR}"
 	@"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${DOTBOT_CONFIG}"
+
+run-lint: ## Run ansible-lint
+	@[ -f "`which ansible-lint`" ] && ansible-lint --offline -p "${PLAYBOOK}"
 
 ## Internal stuff
 .install-git-submodules:

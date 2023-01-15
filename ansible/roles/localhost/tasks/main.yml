@@ -1,30 +1,30 @@
 ---
-  - name: Installing homebrew packages
-    homebrew:
-      name: "{{ localhost_homebrew_packages }}"
-      state: present
+- name: Installing homebrew packages
+  community.general.homebrew:
+    name: "{{ localhost_homebrew_packages }}"
+    state: present
 
-  - name: Installing homebrew repos
-    homebrew_tap:
-      name: "{{ localhost_homebrew_repos }}"
-      state: present
+- name: Installing homebrew repos
+  community.general.homebrew_tap:
+    name: "{{ localhost_homebrew_repos }}"
+    state: present
 
-  - name: Installing homebrew cask packages
-    homebrew_cask:
-      name: "{{ localhost_homebrew_cask_packages }}"
-      state: present
+- name: Installing homebrew cask packages
+  community.general.homebrew_cask:
+    name: "{{ localhost_homebrew_cask_packages }}"
+    state: present
 
-  - name: Installing fonts
-    homebrew_cask:
-      name: "{{ localhost_fonts }}"
-      state: present
+- name: Installing fonts
+  community.general.homebrew_cask:
+    name: "{{ localhost_fonts }}"
+    state: present
 
-  - name: Installing neovim plugins
-    shell:
-      chdir: "./../"
-      cmd: "make .install-neovim-plugins"
+- name: Installing neovim plugins
+  ansible.builtin.command:
+    chdir: "./../"
+    cmd: "make .install-neovim-plugins"
 
-  - name: Installing oh-my-zsh
-    shell:
-      chdir: "./../"
-      cmd: "make .install-oh-my-zsh"
+- name: Installing oh-my-zsh
+  ansible.builtin.command:
+    chdir: "./../"
+    cmd: "make .install-oh-my-zsh"
