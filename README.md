@@ -12,6 +12,15 @@ Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
 > make run
 ```
 
+## :spiral_notepad: Make commands
+
+```sh
+> make
+
+run         Run setup
+run-lint    Run ansible-lint
+```
+
 ## :spiral_notepad: Contents
 
 ```
