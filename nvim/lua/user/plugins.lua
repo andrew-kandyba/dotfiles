@@ -118,6 +118,11 @@ vim.api.nvim_set_hl(0, 'FloatBorder', {
     bg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
 })
 
+vim.api.nvim_set_hl(0, 'VertSplit', {
+    guifg = fg,
+    guibg = bg,
+})
+
 vim.api.nvim_set_hl(0, 'CursorLineBg', {
     fg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
     bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,

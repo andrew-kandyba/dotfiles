@@ -5,7 +5,7 @@ o.clipboard = 'unnamedplus'
 o.completeopt = 'menuone,longest,preview'
 o.confirm = true
 o.expandtab = true
-o.fillchars:append({ eob = ' ' })
+o.fillchars:append({ eob = ' ', vert = " "})
 o.ignorecase = true
 o.list = true
 o.listchars = { tab = '▸ ', trail = '·' }
