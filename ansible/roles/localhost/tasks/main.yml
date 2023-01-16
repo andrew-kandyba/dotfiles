@@ -23,8 +23,12 @@
   ansible.builtin.command:
     chdir: "./../"
     cmd: "make .install-neovim-plugins"
+  register: result
+  changed_when: result.rc != 0
 
 - name: Installing oh-my-zsh
   ansible.builtin.command:
     chdir: "./../"
     cmd: "make .install-oh-my-zsh"
+  register: result
+  changed_when: result.rc != 0
