@@ -1,5 +1,8 @@
 # .dotfiles (WIP)
 
+[![ansible-lint](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml)       &ensp; [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)        
+&emsp;  
+
 This is a repo for my OS X dotfiles.
 Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).   
 
@@ -12,7 +15,7 @@ Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
 > make run
 ```
 
-## :spiral_notepad: Make commands
+## :pushpin: Make commands
 
 ```sh
 > 🦄 .dotfiles: make
@@ -21,7 +24,7 @@ run         Run setup
 run-lint    Run ansible-lint
 ```
 
-## :spiral_notepad: Contents
+## :books: Contents
 
 ```
   - 1password
