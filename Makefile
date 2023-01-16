@@ -31,9 +31,9 @@ run-lint: ## Run ansible-lint
 	@[ -f "`which nvim`" ] && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' || exit 0;
 
 .install-oh-my-zsh:
+	@ln -sf $(PWD)/../oh-my-zsh/themes/unicorn.zsh-theme ~/.oh-my-zsh/themes/unicorn.zsh-theme
+	@ln -sf $(PWD)/../oh-my-zsh/.zshrc ~/.zshrc
 	@[ ! -d ~/.oh-my-zsh ] && curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | /bin/bash || exit 0;
-	@ln -sf $(PWD)/oh-my-zsh/themes/unicorn.zsh-theme ~/.oh-my-zsh/themes/unicorn.zsh-theme
-	@ln -sf $(PWD)/oh-my-zsh/.zshrc ~/.zshrc
 
 .install-ansible:
 	@[ ! -f "`which ansible`" ] && brew install ansible || exit 0;
