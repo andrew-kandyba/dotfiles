@@ -2,7 +2,7 @@ DOTBOT_DIR := "$(PWD)/dotbot"
 DOTBOT_BIN := "bin/dotbot"
 DOTBOT_CONFIG := "$(PWD)/dotbot.yaml"
 
-PLAYBOOK := "$(PWD)/ansible/local.yml"
+PLAYBOOK := "$(PWD)/ansible/local.yaml"
 BASEDIR := "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 .PHONY := help
@@ -39,4 +39,4 @@ run-lint: ## Run ansible-lint
 	@[ ! -f "`which ansible`" ] && brew install ansible || exit 0;
 
 .run-playbook:
-	@cd $(PWD)/ansible && ansible-playbook --connection=local --inventory 127.0.0.1, local.yml
+	@cd $(PWD)/ansible && ansible-playbook --connection=local --inventory 127.0.0.1, local.yaml
