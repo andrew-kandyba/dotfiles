@@ -3,6 +3,7 @@ localhost_homebrew_packages:
   - ansible-lint
   - bat
   - bfg
+  - composer
   - ctop
   - dive
   - docker-slim

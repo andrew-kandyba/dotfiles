@@ -33,6 +33,7 @@ run-lint    Run ansible-lint
   - bat
   - bfg
   - brew
+  - composer
   - ctop
   - deepl
   - dive
