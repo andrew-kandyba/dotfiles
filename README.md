@@ -77,7 +77,9 @@ run-lint    Run ansible-lint
   - jessarcher/vim-heritage
   - karb94/neoscroll.nvim
   - kyazdani42/nvim-tree.lua
+  - lukas-reineke/indent-blankline.nvim
   - nelstrom/vim-visual-star-search
+  - nvim-lualine/lualine.nvim
   - nvim-telescope/telescope.nvim
   - sheerun/vim-polyglot
   - sickill/vim-pasta
