@@ -74,6 +74,7 @@ run-lint    Run ansible-lint
 
   - AndrewRadev/splitjoin.vim
   - airblade/vim-rooter
+  - akinsho/bufferline.nvim
   - farmergreg/vim-lastplace
   - jessarcher/vim-heritage
   - karb94/neoscroll.nvim

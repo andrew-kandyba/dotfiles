@@ -121,6 +121,15 @@ use({
    end,
  })
 
+-- Display buffers as tabs.
+ use({
+   'akinsho/bufferline.nvim',
+   requires = 'kyazdani42/nvim-web-devicons',
+   config = function()
+     require('user/plugins/bufferline')
+   end,
+ })
+
 -- Colorscheme
 vim.cmd.colorscheme('habamax')
 
