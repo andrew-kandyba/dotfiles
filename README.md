@@ -1,6 +1,6 @@
 # .dotfiles
 
-[![ansible-lint](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml) &nbsp; [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) &nbsp; [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)    
+[![ansible-lint](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml) &nbsp; [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) &nbsp; 
 
 This is a repo for my OS X dotfiles.
 Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).   
