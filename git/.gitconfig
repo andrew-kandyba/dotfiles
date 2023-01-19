@@ -11,6 +11,6 @@
 [push]
     default = current
 [init]
-    defaultBranch = master
+    defaultBranch = main
 [commit]
     gpgsign = true
