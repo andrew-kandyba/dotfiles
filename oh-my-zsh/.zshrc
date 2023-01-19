@@ -21,3 +21,5 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 alias vim="nvim"
 alias cat="bat"
+alias dsp="yes | docker system prune"
+alias dvp="yes | docker volume prune"
