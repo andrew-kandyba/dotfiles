@@ -1,12 +1,11 @@
 # .dotfiles
 
-[![ansible-lint](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml)       &ensp; [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)     &ensp;    [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)    
-&emsp;  
+[![ansible-lint](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml) &nbsp; [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) &nbsp; [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)    
 
 This is a repo for my OS X dotfiles.
 Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).   
 
-## :green_apple: Installation
+## Installation
 
 ```sh
 > git clone git@github.com:andrew-kandyba/dotfiles.git .dotfiles
@@ -15,7 +14,7 @@ Bootstrap is based on the [dotbot](https://github.com/anishathalye/dotbot).
 > make run
 ```
 
-## :pushpin: Make commands
+## Make commands
 
 ```sh
 > 🦄 .dotfiles: make
@@ -24,9 +23,11 @@ run         Run setup
 run-lint    Run ansible-lint
 ```
 
-## :books: Contents
+## Contents
 
 ```
+  Tools:
+
   - 1password
   - ansible
   - ansible-lint
@@ -67,9 +68,9 @@ run-lint    Run ansible-lint
   - zoom
 ```
 
-#### Neovim
-
 ```
+  Neovim plugins:
+
   - packer
 
   - AndrewRadev/splitjoin.vim
