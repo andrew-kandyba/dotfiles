@@ -60,6 +60,7 @@ run-lint    Run ansible-lint
   - oh-my-zsh
   - ripgrep
   - tmux
+  - sublime-text
   - trivy
   - trufflesecurity/trufflehog/trufflehog
   - vagrant

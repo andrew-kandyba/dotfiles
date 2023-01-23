@@ -33,6 +33,7 @@ localhost_homebrew_cask_packages:
   - docker
   - kitty
   - ngrok
+  - sublime-text
   - vagrant
   - virtualbox
   - zoom
