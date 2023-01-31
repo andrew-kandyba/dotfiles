@@ -30,6 +30,7 @@ localhost_homebrew_repos:
 
 localhost_homebrew_cask_packages:
   - 1password
+  - appcleaner
   - deepl
   - docker
   - kitty

@@ -31,6 +31,7 @@ run-lint    Run ansible-lint
   - 1password
   - ansible
   - ansible-lint
+  - appcleaner
   - bat
   - bfg
   - brew
@@ -39,7 +40,6 @@ run-lint    Run ansible-lint
   - deepl
   - dive
   - docker
-  - docker (desktop)
   - docker-compose
   - docker-slim
   - fd
