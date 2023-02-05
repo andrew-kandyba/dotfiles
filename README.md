@@ -59,8 +59,9 @@ run-lint    Run ansible-lint
   - ngrok
   - oh-my-zsh
   - ripgrep
-  - tmux
   - sublime-text
+  - tmux
+  - tree
   - trivy
   - trufflesecurity/trufflehog/trufflehog
   - vagrant

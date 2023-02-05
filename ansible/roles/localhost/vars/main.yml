@@ -3,7 +3,6 @@ localhost_homebrew_packages:
   - ansible-lint
   - bat
   - bfg
-  - colima
   - composer
   - ctop
   - dive
@@ -21,6 +20,7 @@ localhost_homebrew_packages:
   - neovim
   - ripgrep
   - tmux
+  - tree
   - trivy
   - trufflesecurity/trufflehog/trufflehog
   - yamllint
