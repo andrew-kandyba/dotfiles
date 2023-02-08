@@ -36,6 +36,7 @@ localhost_homebrew_cask_packages:
   - kitty
   - ngrok
   - sublime-text
+  - tunnelblick
   - vagrant
   - virtualbox
   - zoom

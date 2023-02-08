@@ -64,6 +64,7 @@ run-lint    Run ansible-lint
   - tree
   - trivy
   - trufflesecurity/trufflehog/trufflehog
+  - tunnelblick
   - vagrant
   - virtualbox
   - yamllint
