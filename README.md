@@ -87,6 +87,7 @@ run-lint    Run ansible-lint
   - nelstrom/vim-visual-star-search
   - nvim-lualine/lualine.nvim
   - nvim-telescope/telescope.nvim
+  - nvim-treesitter/nvim-treesitter
   - sheerun/vim-polyglot
   - sickill/vim-pasta
   - tpope/vim-commentary
