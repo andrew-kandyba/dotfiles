@@ -148,13 +148,25 @@ vim.api.nvim_set_hl(0, 'CursorLineBg', {
     bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
 })
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+-- Git integration.
+use({
+  'lewis6991/gitsigns.nvim',
+  config = function()
+    require('gitsigns').setup()
+    vim.keymap.set('n', ']h', ':Gitsigns next_hunk<CR>')
+    vim.keymap.set('n', '[h', ':Gitsigns prev_hunk<CR>')
+    vim.keymap.set('n', 'gs', ':Gitsigns stage_hunk<CR>')
+    vim.keymap.set('n', 'gS', ':Gitsigns undo_stage_hunk<CR>')
+    vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>')
+    vim.keymap.set('n', 'gb', ':Gitsigns blame_line<CR>')
+  end,
+})
 
+-- Git commands.
+use({
+  'tpope/vim-fugitive',
+  requires = 'tpope/vim-rhubarb',
+})
 -- Improved syntax highlighting
 use({
   'nvim-treesitter/nvim-treesitter',
@@ -199,3 +211,15 @@ use({
     require('user/plugins/cmp')
   end,
 })
+
+if packer_bootstrap then
+    require('packer').sync()
+end
+
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
