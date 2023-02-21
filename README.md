@@ -80,12 +80,13 @@ run-lint    Run ansible-lint
   - airblade/vim-rooter
   - akinsho/bufferline.nvim
   - farmergreg/vim-lastplace
+  - hrsh7th/nvim-cmp
   - jessarcher/vim-heritage
   - karb94/neoscroll.nvim
   - kyazdani42/nvim-tree.lua
   - lukas-reineke/indent-blankline.nvim
   - nelstrom/vim-visual-star-search
-  - neovim/nvim-lspconfig'
+  - neovim/nvim-lspconfig
   - nvim-lualine/lualine.nvim
   - nvim-telescope/telescope.nvim
   - nvim-treesitter/nvim-treesitter
