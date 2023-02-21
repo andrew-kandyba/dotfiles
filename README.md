@@ -85,6 +85,7 @@ run-lint    Run ansible-lint
   - kyazdani42/nvim-tree.lua
   - lukas-reineke/indent-blankline.nvim
   - nelstrom/vim-visual-star-search
+  - neovim/nvim-lspconfig'
   - nvim-lualine/lualine.nvim
   - nvim-telescope/telescope.nvim
   - nvim-treesitter/nvim-treesitter

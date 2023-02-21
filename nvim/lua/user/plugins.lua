@@ -169,3 +169,15 @@ use({
     require('user/plugins/treesitter')
   end,
 })
+
+-- Language Server Protocol.
+use({
+  'neovim/nvim-lspconfig',
+  requires = {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+  },
+  config = function()
+    require('user/plugins/lspconfig')
+  end,
+})
