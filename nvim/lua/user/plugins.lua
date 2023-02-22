@@ -148,6 +148,10 @@ vim.api.nvim_set_hl(0, 'CursorLineBg', {
     bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
 })
 
+vim.api.nvim_set_hl(0, 'DiffChange', {
+    guibg = none,
+})
+
 -- Git integration.
 use({
   'lewis6991/gitsigns.nvim',
@@ -155,8 +159,7 @@ use({
     require('gitsigns').setup()
     vim.keymap.set('n', ']h', ':Gitsigns next_hunk<CR>')
     vim.keymap.set('n', '[h', ':Gitsigns prev_hunk<CR>')
-    vim.keymap.set('n', 'gs', ':Gitsigns stage_hunk<CR>')
-    vim.keymap.set('n', 'gS', ':Gitsigns undo_stage_hunk<CR>')
+    vim.keymap.set('n', 'gr', ':Gitsigns reset_hunk<CR>')
     vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>')
     vim.keymap.set('n', 'gb', ':Gitsigns blame_line<CR>')
   end,
