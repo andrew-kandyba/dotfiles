@@ -9,6 +9,11 @@ require('lspconfig').intelephense.setup({
         capabilities = capabilities
     })
 
+-- Golang
+require('lspconfig').gopls.setup({
+        capabilities = capabilities
+    })
+
 -- Vue, JavaScript, TypeScript
 require('lspconfig').volar.setup({
   -- Enable "Take Over Mode" where volar will provide all JS/TS LSP services

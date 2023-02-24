@@ -35,6 +35,8 @@ use('sheerun/vim-polyglot')
 use('farmergreg/vim-lastplace')
 use('nelstrom/vim-visual-star-search')
 use('jessarcher/vim-heritage')
+use('ray-x/go.nvim')
+use('ray-x/guihua.lua')
 
 -- Automatically set the working directory to the project root.
  use({
