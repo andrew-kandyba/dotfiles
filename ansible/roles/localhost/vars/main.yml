@@ -11,6 +11,7 @@ localhost_homebrew_packages:
   - git
   - git-secrets
   - gnupg
+  - golangci-lint
   - hadolint
   - htop
   - jsonlint
