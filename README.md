@@ -84,16 +84,20 @@ run-lint    Run ansible-lint
   - jessarcher/vim-heritage
   - karb94/neoscroll.nvim
   - kyazdani42/nvim-tree.lua
+  - leoluz/nvim-dap-go
   - lewis6991/gitsigns.nvim
   - lukas-reineke/indent-blankline.nvim
+  - mfussenegger/nvim-dap
   - nelstrom/vim-visual-star-search
   - neovim/nvim-lspconfig
   - nvim-lualine/lualine.nvim
   - nvim-telescope/telescope.nvim
   - nvim-treesitter/nvim-treesitter
   - ray-x/go.nvim
+  - rcarriga/nvim-dap-ui
   - sheerun/vim-polyglot
   - sickill/vim-pasta
+  - theHamsta/nvim-dap-virtual-text
   - tpope/vim-commentary
   - tpope/vim-repeat
   - tpope/vim-sleuth

@@ -217,6 +217,37 @@ use({
   end,
 })
 
+-- Debugging
+use({
+    'mfussenegger/nvim-dap',
+    config = function()
+      require('user/plugins/debugging')
+    end,
+})
+
+use({
+  'rcarriga/nvim-dap-ui',
+  config = function()
+      require('dapui').setup()
+  end,
+})
+
+use({
+  'leoluz/nvim-dap-go',
+  config = function()
+    require('dap-go').setup()
+  end,
+})
+
+use({'nvim-telescope/telescope-dap.nvim'})
+
+use({
+  'theHamsta/nvim-dap-virtual-text',
+  config = function()
+    require('nvim-dap-virtual-text').setup()
+  end,
+})
+
 if packer_bootstrap then
     require('packer').sync()
 end
