@@ -4,6 +4,8 @@
 export ZSH="$HOME/.oh-my-zsh"
 export CLICOLOR=1
 export TERM=xterm-256color
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 
 ZSH_THEME="unicorn"
 HYPHEN_INSENSITIVE="true"
