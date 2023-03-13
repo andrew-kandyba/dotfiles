@@ -24,7 +24,7 @@ require('packer').init({
 
 local use = require('packer').use
 
-use 'wbthomason/packer.nvim'
+use('wbthomason/packer.nvim')
 
 use('tpope/vim-surround')
 use('tpope/vim-commentary')
@@ -84,6 +84,42 @@ use('ray-x/guihua.lua')
    end,
  })
 
+-- Fix for docker icons
+require'nvim-web-devicons'.setup {
+ override_by_filename = {
+["docker-compose.yml"] = {
+    icon = "",
+    color = "#458ee6",
+    cterm_color = "68",
+    name = "Dockerfile",
+  },
+  ["docker-compose.yaml"] = {
+    icon = "",
+    color = "#458ee6",
+    cterm_color = "68",
+    name = "Dockerfile",
+  },
+  [".dockerignore"] = {
+    icon = "",
+    color = "#458ee6",
+    cterm_color = "68",
+    name = "Dockerfile",
+  },
+ ["containerfile"] = {
+    icon = "",
+    color = "#458ee6",
+    cterm_color = "68",
+    name = "Dockerfile",
+  },
+  ["dockerfile"] = {
+    icon = "",
+    color = "#f1502f",
+    name = "Dockerfile"
+  }
+ };
+}
+
+-- Telescope
  use({
    'nvim-telescope/telescope.nvim',
    requires = {
@@ -100,7 +136,7 @@ use('ray-x/guihua.lua')
  -- File tree sidebar
  use({
    'kyazdani42/nvim-tree.lua',
-   requires = 'kyazdani42/nvim-web-devicons',
+   requires = 'nvim-tree/nvim-web-devicons',
    config = function()
      require('user/plugins/nvim-tree')
    end,
