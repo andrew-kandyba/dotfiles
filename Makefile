@@ -1,42 +1,34 @@
-DOTBOT_DIR := "$(PWD)/dotbot"
-DOTBOT_BIN := "bin/dotbot"
-DOTBOT_CONFIG := "$(PWD)/dotbot.yaml"
-
-PLAYBOOK := "$(PWD)/ansible/local.yaml"
-BASEDIR := "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 .PHONY := help
 .DEFAULT_GOAL := help
 
+BREW_INSTALLER := "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+PLAYBOOK := ${PWD}/ansible/playbook.yml
+INVENTORIES := ${PWD}/ansible/inventories/home
+VAULT := ${PWD}/ansible/inventories/home/group_vars/home
+VAULT_PASSWORD := ${PWD}/vault_key
+VAULT_PASSWORD_UNDEFINED := "Vault password is undefined"
+
 help:
-	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-27s[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-27s[0m %s\n", $$1, $$2}';
 
-run: ## Run setup
-	@cd "${BASEDIR}"
-	@git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-	@git submodule update --init --recursive "${DOTBOT_DIR}"
-	@"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${DOTBOT_CONFIG}"
-
-run-lint: ## Run ansible-lint
-	@[ -f "`which ansible-lint`" ] && ansible-lint --offline -p "${PLAYBOOK}"
-
-## Internal stuff
-.install-git-submodules:
-	@git submodule update --init --recursive
-
-.install-brew:
-	@[ ! -f "`which brew`" ] && sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | /bin/bash || exit 0;
-
-.install-neovim-plugins:
-	@[ -f "`which nvim`" ] && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' || exit 0;
-
-.install-oh-my-zsh:
-	@[ ! -d ~/.oh-my-zsh ] && curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | /bin/bash && \
-	ln -sf $(PWD)/../oh-my-zsh/themes/unicorn.zsh-theme ~/.oh-my-zsh/themes/unicorn.zsh-theme && \
-	ln -sf $(PWD)/../oh-my-zsh/.zshrc ~/.zshrc || exit 0;
-
-.install-ansible:
+play: ## Run playbook
+	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
+	@[ ! -f "`which brew`" ] && sudo curl -fsSL ${BREW_INSTALLER} | /bin/bash || exit 0;
 	@[ ! -f "`which ansible`" ] && brew install ansible || exit 0;
+	@ansible-playbook -i ${INVENTORIES} --vault-password-file ${VAULT_PASSWORD} ${PLAYBOOK};
 
-.run-playbook:
-	@cd $(PWD)/ansible && ansible-playbook --connection=local --inventory 127.0.0.1, local.yaml
+encrypt: ## Encrypt vault
+	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
+	@ansible-vault encrypt --vault-password-file ${VAULT_PASSWORD} ${VAULT};
+
+decrypt: ## Decrypt vault
+	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
+	@ansible-vault decrypt --vault-password-file ${VAULT_PASSWORD} ${VAULT};
+
+#todo
+lint: ## Run lint
+	@exit 0;
+
+#todo
+tests: ## Run tests
+	@exit 0;

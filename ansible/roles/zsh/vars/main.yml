@@ -1,0 +1,12 @@
+---
+zsh:
+  packages: zsh
+  user: "{{ lookup('env','USER') }}"
+
+omz:
+  installer:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/omz_installer.sh
+  config:
+    dest:  ~/.zshrc
+    template: templates/.zshrc.j2

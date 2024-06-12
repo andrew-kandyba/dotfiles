@@ -1,0 +1,14 @@
+---
+- name: Installing zsh
+  community.general.homebrew:
+    name: "{{ zsh.packages }}"
+    state: present
+
+- name: Set zsh as default shell
+  ansible.builtin.user:
+    name: "{{ zsh.user }}"
+    shell: /bin/zsh
+
+- name: oh-my-zsh | Discovery tasks
+  ansible.builtin.include_tasks:
+    file: oh_my_zsh.yml

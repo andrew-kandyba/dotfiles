@@ -1,0 +1,17 @@
+---
+brew:
+  formula_packages:
+    - nvm
+  cask_packages:
+    - 1password
+    - bruno
+    - docker
+    - firefox
+    - iterm2
+    - phpstorm
+    - raycast
+    - sublime-text
+    - telegram-desktop
+    - virtualbox
+  fonts:
+    - font-fira-code-nerd-font

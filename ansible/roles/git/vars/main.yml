@@ -1,0 +1,14 @@
+---
+git:
+  branch: main
+  config:
+    dest:  ~/.gitconfig
+    template: templates/.gitconfig.j2
+  ignore:
+    dest:  ~/.gitignore
+    template: templates/.gitignore.j2
+  packages:
+    - difftastic
+    - git
+    - git-secrets
+

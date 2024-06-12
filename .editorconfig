@@ -12,4 +12,3 @@ indent_size = 2
 
 [{Makefile,**.mk}]
 indent_style = tab
-
