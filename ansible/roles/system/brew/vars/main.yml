@@ -1,0 +1,15 @@
+---
+brew:
+  cask_packages:
+    - 1password
+    - bruno
+    - docker
+    - firefox
+    - ghostty
+    - phpstorm
+    - raycast
+    - telegram-desktop
+    - virtualbox
+    - zed
+  fonts:
+    - font-fira-code-nerd-font

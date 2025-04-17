@@ -1,21 +1,36 @@
 .PHONY := help
 .DEFAULT_GOAL := help
 
-BREW_INSTALLER := "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 PLAYBOOK := ${PWD}/ansible/playbook.yml
 INVENTORIES := ${PWD}/ansible/inventories/home
 VAULT := ${PWD}/ansible/inventories/home/group_vars/home
 VAULT_PASSWORD := ${PWD}/vault_key
 VAULT_PASSWORD_UNDEFINED := "Vault password is undefined"
+BREW_INSTALLER := "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+BREW_UNINSTALL := "https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh"
+OMZSH_UNINSTALL := ${HOME}/.oh-my-zsh/tools/uninstall.sh
+ANSIBLE_LINT_IMG := "pipelinecomponents/ansible-lint"
 
 help:
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-27s[0m %s\n", $$1, $$2}';
 
 play: ## Run playbook
 	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
-	@[ ! -f "`which brew`" ] && sudo curl -fsSL ${BREW_INSTALLER} | /bin/bash || exit 0;
-	@[ ! -f "`which ansible`" ] && brew install ansible || exit 0;
+	@[ ! -f "`which brew`" ] && echo "Installing brew...\n" && sudo curl -fsSL ${BREW_INSTALLER} | /bin/bash || exit 0;
+	@[ ! -f "`which ansible`" ] && echo "Installing ansible...\n" && brew install ansible || exit 0;
+	@echo "Running playbook..."
 	@ansible-playbook -i ${INVENTORIES} --vault-password-file ${VAULT_PASSWORD} ${PLAYBOOK};
+
+reset: ## Reset system to initial state
+	@echo "Resetting system..."
+	@brew uninstall $$(grep -E '^\s*-' ansible/roles/system/brew/vars/main.yml | sed 's/\s*-\s*//')
+	@brew uninstall $$(grep -E '^\s*-' ansible/roles/tools/git/vars/main.yml | sed 's/\s*-\s*//')
+	@rm -f $$HOME/.gitconfig
+	@rm -f $$HOME/.gitignore
+	@rm -f $$HOME/.config/ghostty/config
+	@sudo /bin/bash ${OMZSH_UNINSTALL} || true
+	@sudo curl -fsSL ${BREW_UNINSTALL} | /bin/bash || true
+	@echo "System reset completed. You may need to restart your terminal."
 
 encrypt: ## Encrypt vault
 	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
@@ -25,10 +40,6 @@ decrypt: ## Decrypt vault
 	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
 	@ansible-vault decrypt --vault-password-file ${VAULT_PASSWORD} ${VAULT};
 
-#todo
-lint: ## Run lint
-	@exit 0;
-
-#todo
-tests: ## Run tests
-	@exit 0;
+lint: ## Run ansible-lint
+	@echo "Running ansible-lint..."
+	@docker run --rm -v ${PWD}:/ws ${ANSIBLE_LINT_IMG} -c /ws/.ansible-lint /ws/ansible/

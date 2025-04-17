@@ -1,0 +1,5 @@
+---
+zed:
+  config:
+    dest: ~/.config/zed/settings.json
+    template: templates/settings.json.j2

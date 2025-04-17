@@ -1,0 +1,15 @@
+profile: safety
+use_default_rules: true
+
+exclude_paths:
+  - .github/
+  - ansible/inventories/home/group_vars/
+
+skip_list:
+  - no-changed-when
+  - fqcn-builtins
+
+warn_list:
+  - yaml[empty-lines]
+  - yaml[colons]
+  - jinja[spacing]

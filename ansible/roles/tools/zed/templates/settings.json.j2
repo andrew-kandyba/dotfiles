@@ -1,0 +1,79 @@
+{
+  "assistant": {
+    "dock": "bottom",
+    "default_profile": "write",
+    "always_allow_tool_actions": true,
+    "enable_experimental_live_diffs": true,
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-latest"
+    },
+    "version": "2"
+  },
+  "git": {
+    "inline_blame": { "enabled": false }
+  },
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "tabs": {
+    "git_status": true,
+    "file_icons": true,
+    "show_close_button": "hover"
+  },
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false
+  },
+  "project_panel": {
+    "indent_size": 15
+  },
+  "base_keymap": "JetBrains",
+  "soft_wrap": "editor_width",
+  "preferred_line_length": 140,
+  "theme": "Ayu Light",
+  "buffer_font_size": 12,
+  "buffer_font_family": "FiraCode Nerd Font Mono",
+  "buffer_font_weight": 400,
+  "buffer_line_height": "comfortable",
+  "ui_font_family": "FiraCode Nerd Font Mono",
+  "ui_font_size": 12,
+  "show_edit_predictions": true,
+  "show_whitespaces": "all",
+  "collaboration_panel": {
+    "button": false
+  },
+  "auto_signature_help": true,
+  "terminal": {
+    "dock": "bottom",
+    "cursor_shape": "bar",
+    "font_family": "FiraCode Nerd Font Mono",
+    "font_size": 12,
+    "button": true,
+    "toolbar": {
+      "breadcrumbs": false
+    }
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
+  "inlay_hints": { "enabled": true },
+  "scrollbar": { "show": "never" },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/node_modules",
+    "**/vendor",
+    "**/dist",
+    "**/build",
+    "**/target",
+    "**/.rope*",
+    "**/*_cache",
+    "**/.*-version",
+    "**/.DS_Store"
+  ],
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  }
+}

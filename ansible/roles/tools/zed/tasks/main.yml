@@ -1,0 +1,5 @@
+---
+- name: Create settings.json
+  ansible.builtin.template:
+    src: "{{ zed.config.template }}"
+    dest: "{{ zed.config.dest }}"

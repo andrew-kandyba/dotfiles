@@ -1,8 +1,12 @@
 ---
 - name: $HOME sweet $HOME
   hosts: home
-  gather_facts: no
+  gather_facts: false
   roles:
-    - brew
-    - git
-    - zsh
+    - system/brew
+    - system/git
+    - system/gpg
+    - system/shell
+    - system/ssh
+    - tools/ghostty
+    - tools/zed
