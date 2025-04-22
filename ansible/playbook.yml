@@ -1,0 +1,12 @@
+---
+- name: $HOME sweet $HOME
+  hosts: home
+  gather_facts: false
+  roles:
+    - system/brew
+    - system/git
+    - system/gpg
+    - system/shell
+    - system/ssh
+    - tools/ghostty
+    - tools/zed

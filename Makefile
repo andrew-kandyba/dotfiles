@@ -1,42 +1,73 @@
-DOTBOT_DIR := "$(PWD)/dotbot"
-DOTBOT_BIN := "bin/dotbot"
-DOTBOT_CONFIG := "$(PWD)/dotbot.yaml"
-
-PLAYBOOK := "$(PWD)/ansible/local.yaml"
-BASEDIR := "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 .PHONY := help
 .DEFAULT_GOAL := help
 
+PLAYBOOK := ${PWD}/ansible/playbook.yml
+INVENTORIES := ${PWD}/ansible/inventories/home
+VAULT := ${PWD}/ansible/inventories/home/group_vars/home
+VAULT_PASSWORD := ${PWD}/vault_key
+VAULT_PASSWORD_UNDEFINED := "Vault password is undefined"
+BREW_INSTALLER := "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+BREW_UNINSTALL := "https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh"
+OMZSH_UNINSTALL := ${HOME}/.oh-my-zsh/tools/uninstall.sh
+ANSIBLE_LINT_IMG := "pipelinecomponents/ansible-lint"
+
 help:
-	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-27s[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-27s[0m %s\n", $$1, $$2}';
 
-run: ## Run setup
-	@cd "${BASEDIR}"
-	@git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-	@git submodule update --init --recursive "${DOTBOT_DIR}"
-	@"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${DOTBOT_CONFIG}"
+play: ## Run playbook
+	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
+	@[ ! -f "`which brew`" ] && echo "Installing brew...\n" && sudo curl -fsSL ${BREW_INSTALLER} | /bin/bash || exit 0;
+	@[ ! -f "`which ansible`" ] && echo "Installing ansible...\n" && brew install ansible || exit 0;
+	@echo "Running playbook..."
+	@ansible-playbook -i ${INVENTORIES} --vault-password-file ${VAULT_PASSWORD} ${PLAYBOOK};
 
-run-lint: ## Run ansible-lint
-	@[ -f "`which ansible-lint`" ] && ansible-lint --offline -p "${PLAYBOOK}"
+reset: ## Reset system to initial state
+	@echo "Resetting system..."
+	@echo "Uninstalling brew packages..."
 
-## Internal stuff
-.install-git-submodules:
-	@git submodule update --init --recursive
+	-@for pkg in $$(grep -E '^\s*-' ansible/roles/system/brew/vars/main.yml | sed 's/.*-\s*//' | tr -d '"' | tr -d "'"); do \
+		echo "Uninstalling cask: $$pkg"; \
+		brew uninstall --force --cask "$$pkg" || true; \
+	done
 
-.install-brew:
-	@[ ! -f "`which brew`" ] && sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | /bin/bash || exit 0;
+	-@for pkg in $$(grep -E '^\s*-' ansible/roles/system/git/vars/main.yml | sed 's/.*-\s*//' | tr -d '"' | tr -d "'"); do \
+		echo "Uninstalling formula: $$pkg"; \
+		brew uninstall --force "$$pkg" || true; \
+	done
 
-.install-neovim-plugins:
-	@[ -f "`which nvim`" ] && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' || exit 0;
+	-@for pkg in zsh gnupg pinentry-mac telegram-desktop font-fira-code-nerd-font; do \
+		echo "Uninstalling formula: $$pkg"; \
+		brew uninstall --force "$$pkg" || true; \
+	done
 
-.install-oh-my-zsh:
-	@[ ! -d ~/.oh-my-zsh ] && curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | /bin/bash && \
-	ln -sf $(PWD)/../oh-my-zsh/themes/unicorn.zsh-theme ~/.oh-my-zsh/themes/unicorn.zsh-theme && \
-	ln -sf $(PWD)/../oh-my-zsh/.zshrc ~/.zshrc || exit 0;
+	@echo "Removing configuration files..."
+	-@rm -f $$HOME/.gitconfig
+	-@rm -f $$HOME/.gitignore
+	-@rm -f $$HOME/.zshrc
+	-@rm -rf $$HOME/.config/ghostty
+	-@rm -rf $$HOME/.config/zed
 
-.install-ansible:
-	@[ ! -f "`which ansible`" ] && brew install ansible || exit 0;
+	@echo "Cleaning up SSH and GPG configurations..."
+	-@rm -f $$HOME/.ssh/config
+	-@rm -f $$HOME/.ssh/id_ed25519*
+	-@rm -rf $$HOME/.gnupg
 
-.run-playbook:
-	@cd $(PWD)/ansible && ansible-playbook --connection=local --inventory 127.0.0.1, local.yaml
+	@echo "Uninstalling Oh My Zsh..."
+	-@[ -f ${OMZSH_UNINSTALL} ] && ${OMZSH_UNINSTALL} || true
+
+	@echo "Uninstalling Homebrew..."
+	-@which brew >/dev/null && /bin/bash -c "$$(curl -fsSL ${BREW_UNINSTALL})" || true
+
+	@echo "System reset completed. You may need to restart your terminal."
+
+encrypt: ## Encrypt vault
+	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
+	@ansible-vault encrypt --vault-password-file ${VAULT_PASSWORD} ${VAULT};
+
+decrypt: ## Decrypt vault
+	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
+	@ansible-vault decrypt --vault-password-file ${VAULT_PASSWORD} ${VAULT};
+
+lint: ## Run ansible-lint
+	@echo "Running ansible-lint..."
+	@docker run --rm -v ${PWD}:/ws ${ANSIBLE_LINT_IMG} -c /ws/.ansible-lint /ws/ansible/

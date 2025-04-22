@@ -1,0 +1,11 @@
+Host *
+    StrictHostKeyChecking yes
+    HashKnownHosts yes
+    PubkeyAuthentication yes
+    PasswordAuthentication no
+
+Host github.com
+    User git
+    IdentityFile {{ ssh.key_path }}
+    IdentitiesOnly yes
+    Compression yes

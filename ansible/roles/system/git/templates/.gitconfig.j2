@@ -1,0 +1,21 @@
+ [user]
+    name = "{{ vault.git.name }}"
+    email = "{{ vault.git.email }}"
+[core]
+    autocrlf = input
+    excludesfile = "{{ git.ignore.dest }}"
+[merge]
+    conflictstyle = diff3
+    ff = false
+[push]
+    default = current
+[init]
+    defaultBranch = "{{ git.branch }}"
+[diff]
+    tool = difftastic
+[difftool]
+    prompt = false
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+    difftool = true
