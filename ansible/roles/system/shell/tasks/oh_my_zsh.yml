@@ -26,3 +26,4 @@
   ansible.builtin.template:
     src: "{{ omz.config.template }}"
     dest: "{{ omz.config.dest }}"
+    mode: "0644"

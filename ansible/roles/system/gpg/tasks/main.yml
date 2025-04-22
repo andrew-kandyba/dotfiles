@@ -31,19 +31,25 @@
 
 - name: Get GPG key ID
   ansible.builtin.shell:
-    cmd: gpg --list-secret-keys --keyid-format=long "{{ vault.git.email }}" | grep sec | awk '{print $2}' | cut -d'/' -f2
+    cmd: set -o pipefail && gpg --list-secret-keys --keyid-format=long "{{ vault.git.email }}" | grep sec | awk '{print $2}' | cut -d'/' -f2
+  args:
+    executable: /bin/bash
   register: gpg_key_id
   changed_when: false
   when: gpg_keys.rc != 0 or gpg_batch_file.changed
 
 - name: Configure Git signing key
-  ansible.builtin.command:
-    cmd: git config --global user.signingkey {{ gpg_key_id.stdout }}
+  community.general.git_config:
+    name: user.signingkey
+    scope: global
+    value: "{{ gpg_key_id.stdout }}"
   when: gpg_key_id.stdout is defined and gpg_key_id.stdout != ""
 
 - name: Enable commit signing in Git
-  ansible.builtin.command:
-    cmd: git config --global commit.gpgsign true
+  community.general.git_config:
+    name: commit.gpgsign
+    scope: global
+    value: "true"
   when: gpg_key_id.stdout is defined and gpg_key_id.stdout != ""
 
 - name: Configure GPG agent

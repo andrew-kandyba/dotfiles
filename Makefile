@@ -23,13 +23,41 @@ play: ## Run playbook
 
 reset: ## Reset system to initial state
 	@echo "Resetting system..."
-	@brew uninstall $$(grep -E '^\s*-' ansible/roles/system/brew/vars/main.yml | sed 's/\s*-\s*//')
-	@brew uninstall $$(grep -E '^\s*-' ansible/roles/tools/git/vars/main.yml | sed 's/\s*-\s*//')
-	@rm -f $$HOME/.gitconfig
-	@rm -f $$HOME/.gitignore
-	@rm -f $$HOME/.config/ghostty/config
-	@sudo /bin/bash ${OMZSH_UNINSTALL} || true
-	@sudo curl -fsSL ${BREW_UNINSTALL} | /bin/bash || true
+	@echo "Uninstalling brew packages..."
+
+	-@for pkg in $$(grep -E '^\s*-' ansible/roles/system/brew/vars/main.yml | sed 's/.*-\s*//' | tr -d '"' | tr -d "'"); do \
+		echo "Uninstalling cask: $$pkg"; \
+		brew uninstall --force --cask "$$pkg" || true; \
+	done
+
+	-@for pkg in $$(grep -E '^\s*-' ansible/roles/system/git/vars/main.yml | sed 's/.*-\s*//' | tr -d '"' | tr -d "'"); do \
+		echo "Uninstalling formula: $$pkg"; \
+		brew uninstall --force "$$pkg" || true; \
+	done
+
+	-@for pkg in zsh gnupg pinentry-mac telegram-desktop font-fira-code-nerd-font; do \
+		echo "Uninstalling formula: $$pkg"; \
+		brew uninstall --force "$$pkg" || true; \
+	done
+
+	@echo "Removing configuration files..."
+	-@rm -f $$HOME/.gitconfig
+	-@rm -f $$HOME/.gitignore
+	-@rm -f $$HOME/.zshrc
+	-@rm -rf $$HOME/.config/ghostty
+	-@rm -rf $$HOME/.config/zed
+
+	@echo "Cleaning up SSH and GPG configurations..."
+	-@rm -f $$HOME/.ssh/config
+	-@rm -f $$HOME/.ssh/id_ed25519*
+	-@rm -rf $$HOME/.gnupg
+
+	@echo "Uninstalling Oh My Zsh..."
+	-@[ -f ${OMZSH_UNINSTALL} ] && ${OMZSH_UNINSTALL} || true
+
+	@echo "Uninstalling Homebrew..."
+	-@which brew >/dev/null && /bin/bash -c "$$(curl -fsSL ${BREW_UNINSTALL})" || true
+
 	@echo "System reset completed. You may need to restart your terminal."
 
 encrypt: ## Encrypt vault

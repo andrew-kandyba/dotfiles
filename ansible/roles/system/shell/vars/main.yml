@@ -1,7 +1,7 @@
 ---
 zsh:
   packages: zsh
-  user: "{{ lookup('env','USER') }}"
+  user: "{{ lookup('env', 'USER') }}"
 
 omz:
   installer:
