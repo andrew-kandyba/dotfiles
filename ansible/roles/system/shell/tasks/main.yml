@@ -1,0 +1,9 @@
+---
+- name: Installing zsh
+  community.general.homebrew:
+    name: "{{ zsh.packages }}"
+    state: present
+
+- name: Discovery tasks
+  ansible.builtin.include_tasks:
+    file: oh_my_zsh.yml

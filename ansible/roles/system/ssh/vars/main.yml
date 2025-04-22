@@ -1,0 +1,8 @@
+---
+ssh:
+  dir: ~/.ssh
+  config:
+    dest: ~/.ssh/config
+    template: templates/config.j2
+  key_path: ~/.ssh/id_ed25519
+  known_hosts: ~/.ssh/known_hosts

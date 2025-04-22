@@ -1,0 +1,65 @@
+---
+- name: Ensure gnupg is installed
+  community.general.homebrew:
+    name: "{{ gpg.packages }}"
+    state: present
+
+- name: Ensure GPG directory exists
+  ansible.builtin.file:
+    path: "{{ gpg.homedir }}"
+    state: directory
+    mode: "0700"
+
+- name: Create GPG batch file for key generation
+  ansible.builtin.template:
+    src: "{{ gpg.batch_config.template }}"
+    dest: "{{ gpg.batch_config.dest }}"
+    mode: "0600"
+  register: gpg_batch_file
+
+- name: Check if GPG key exists
+  ansible.builtin.command:
+    cmd: gpg --list-secret-keys "{{ vault.git.email }}"
+  register: gpg_keys
+  ignore_errors: true
+  changed_when: false
+
+- name: Generate GPG key
+  ansible.builtin.command:
+    cmd: gpg --batch --generate-key {{ gpg.batch_config.dest }}
+  when: gpg_keys.rc != 0
+
+- name: Get GPG key ID
+  ansible.builtin.shell:
+    cmd: set -o pipefail && gpg --list-secret-keys --keyid-format=long "{{ vault.git.email }}" | grep sec | awk '{print $2}' | cut -d'/' -f2
+  args:
+    executable: /bin/bash
+  register: gpg_key_id
+  changed_when: false
+  when: gpg_keys.rc != 0 or gpg_batch_file.changed
+
+- name: Configure Git signing key
+  community.general.git_config:
+    name: user.signingkey
+    scope: global
+    value: "{{ gpg_key_id.stdout }}"
+  when: gpg_key_id.stdout is defined and gpg_key_id.stdout != ""
+
+- name: Enable commit signing in Git
+  community.general.git_config:
+    name: commit.gpgsign
+    scope: global
+    value: "true"
+  when: gpg_key_id.stdout is defined and gpg_key_id.stdout != ""
+
+- name: Configure GPG agent
+  ansible.builtin.template:
+    src: "{{ gpg.agent_config.template }}"
+    dest: "{{ gpg.agent_config.dest }}"
+    mode: "0600"
+
+- name: Remove temporary batch file
+  ansible.builtin.file:
+    path: "{{ gpg.batch_config.dest }}"
+    state: absent
+  when: gpg_batch_file.changed

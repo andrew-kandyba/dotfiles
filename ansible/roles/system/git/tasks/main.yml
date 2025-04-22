@@ -1,0 +1,17 @@
+---
+- name: Installing packages
+  community.general.homebrew:
+    name: "{{ git.packages }}"
+    state: present
+
+- name: Create .gitconfig
+  ansible.builtin.template:
+    src: "{{ git.config.template }}"
+    dest: "{{ git.config.dest }}"
+    mode: "0600"
+
+- name: Create .gitignore
+  ansible.builtin.template:
+    src: "{{ git.ignore.template }}"
+    dest: "{{ git.ignore.dest }}"
+    mode: "0644"

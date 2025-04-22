@@ -1,0 +1,29 @@
+---
+- name: Oh-my-zsh > Check that the omz installer exists
+  ansible.builtin.stat:
+    path: "{{ omz.installer.dest }}"
+  register: installer
+
+- name: Oh-my-zsh > Download install script
+  ansible.builtin.get_url:
+    url: "{{ omz.installer.url }}"
+    dest: "{{ omz.installer.dest }}"
+    mode: "0755"
+  when: not installer.stat.exists
+
+- name: Oh-my-zsh > Check if oh-my-zsh is installed
+  ansible.builtin.stat:
+    path: "~/.oh-my-zsh"
+  register: omz_installed
+
+- name: Oh-my-zsh > Installing oh-my-zsh
+  ansible.builtin.shell:
+    cmd: "{{ omz.installer.dest }}"
+    executable: /bin/sh
+  when: not omz_installed.stat.exists
+
+- name: Oh-my-zsh > Create .zshrc
+  ansible.builtin.template:
+    src: "{{ omz.config.template }}"
+    dest: "{{ omz.config.dest }}"
+    mode: "0644"

@@ -1,16 +1,13 @@
 name: ansible-lint
 on: [push, pull_request]
-
 jobs:
   build:
+    name: Ansible lint
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Run ansible-lint in docker
+        uses: docker://pipelinecomponents/ansible-lint:latest
         with:
-          fetch-depth: 0
-
-      - name: Run ansible-lint
-        uses: ansible/ansible-lint-action@main
-        with:
-         path: "${{ github.workspace }}/andrew-kandyba/dotfiles/ansible/local.yaml" 
+          entrypoint: ansible-lint
+          args: "--config-file=.ansible-lint ansible/"

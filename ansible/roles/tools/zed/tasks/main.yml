@@ -1,0 +1,12 @@
+---
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    path: "{{ zed.config.homedir }}"
+    state: directory
+    mode: "0700"
+
+- name: Create settings.json
+  ansible.builtin.template:
+    src: "{{ zed.config.template }}"
+    dest: "{{ zed.config.dest }}"
+    mode: "0644"
