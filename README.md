@@ -1,4 +1,4 @@
-# .dotfiles (macOS)
+# 🏡 .dotfiles (macOS)
 
 [![ansible-lint](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/andrew-kandyba/dotfiles/actions/workflows/ansible-lint.yml) &nbsp; [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) &nbsp;
 

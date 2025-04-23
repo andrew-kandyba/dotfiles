@@ -10,3 +10,4 @@ omz:
   config:
     dest: ~/.zshrc
     template: templates/.zshrc.j2
+  plugins: "~/.oh-my-zsh/custom/plugins"
