@@ -11,6 +11,18 @@ BREW_UNINSTALL := "https://raw.githubusercontent.com/Homebrew/install/HEAD/unins
 OMZSH_UNINSTALL := ${HOME}/.oh-my-zsh/tools/uninstall.sh
 ANSIBLE_LINT_IMG := "pipelinecomponents/ansible-lint"
 
+define VAULT_TEMPLATE
+vault:
+  git:
+    name: "Your Name"
+    email: "your.email@example.com"
+  ssh:
+    passphrase: "ssh-key-passphrase"
+  gpg:
+    passphrase: "gpg-key-passphrase"
+endef
+export VAULT_TEMPLATE
+
 help:
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-27s[0m %s\n", $$1, $$2}';
 
@@ -59,6 +71,18 @@ reset: ## Reset system to initial state
 	-@which brew >/dev/null && /bin/bash -c "$$(curl -fsSL ${BREW_UNINSTALL})" || true
 
 	@echo "System reset completed. You may need to restart your terminal."
+
+vault: ## Create vault
+	@echo "Creating vault..."
+	@echo "vault-secure-password" > ${VAULT_PASSWORD}
+	@chmod 600 ${VAULT_PASSWORD}
+	@mkdir -p ansible/inventories/home/group_vars
+	@echo "$$VAULT_TEMPLATE" > ${VAULT}
+	@echo "Vault created. Don't forget to:"
+	@echo "1. Change default password ${VAULT_PASSWORD}"
+	@echo "2. Edit data in ${VAULT}"
+	@echo "3. Run 'make encrypt' to secure the vault"
+	@echo "4. Run 'make play' to run the playbook"
 
 encrypt: ## Encrypt vault
 	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
