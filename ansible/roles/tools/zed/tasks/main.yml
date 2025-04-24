@@ -10,3 +10,9 @@
     src: "{{ zed.config.template }}"
     dest: "{{ zed.config.dest }}"
     mode: "0644"
+
+- name: Create keymap.json
+  ansible.builtin.template:
+    src: "{{ zed.keymap.template }}"
+    dest: "{{ zed.keymap.dest }}"
+    mode: "0644"

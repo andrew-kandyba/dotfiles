@@ -4,3 +4,6 @@ zed:
     homedir: ~/.config/zed
     dest: ~/.config/zed/settings.json
     template: templates/settings.json.j2
+  keymap:
+    dest: ~/.config/zed/keymap.json
+    template: templates/keymap.json.j2
