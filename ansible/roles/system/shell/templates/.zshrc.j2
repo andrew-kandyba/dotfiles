@@ -21,6 +21,7 @@ plugins=(
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 autoload -Uz compinit && compinit
+gpgconf --launch gpg-agent
 
 source $ZSH/oh-my-zsh.sh
 

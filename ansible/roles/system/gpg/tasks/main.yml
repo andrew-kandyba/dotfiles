@@ -36,7 +36,7 @@
     executable: /bin/bash
   register: gpg_key_id
   changed_when: false
-  when: gpg_keys.rc != 0 or gpg_batch_file.changed
+  failed_when: gpg_key_id.stdout == ""
 
 - name: Configure Git signing key
   community.general.git_config:
@@ -57,6 +57,13 @@
     src: "{{ gpg.agent_config.template }}"
     dest: "{{ gpg.agent_config.dest }}"
     mode: "0600"
+
+- name: Restart GPG agent
+  ansible.builtin.shell:
+    cmd: |
+      gpgconf --kill gpg-agent
+      gpgconf --launch gpg-agent
+  changed_when: false
 
 - name: Remove temporary batch file
   ansible.builtin.file:
