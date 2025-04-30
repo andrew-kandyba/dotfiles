@@ -5,24 +5,19 @@
     state: directory
     mode: "0700"
 
-- name: Check if SSH key exists
-  ansible.builtin.stat:
-    path: "{{ ssh.key_path }}"
-  register: ssh_key_file
-
-- name: Generate SSH key if not exists
-  ansible.builtin.command:
-    cmd: ssh-keygen -t ed25519 -f {{ ssh.key_path }} -N "{{ vault.ssh.passphrase | default('') }}" -C "{{ vault.git.email }}"
-  when: not ssh_key_file.stat.exists
-
-- name: Create SSH config file
+- name: Create ssh config file
   ansible.builtin.template:
     src: "{{ ssh.config.template }}"
     dest: "{{ ssh.config.dest }}"
     mode: "0644"
 
-- name: Ensure known_hosts file exists
-  ansible.builtin.file:
+- name: Add github.com key to known_hosts
+  ansible.builtin.known_hosts:
+    name: github.com
+    key: "{{ ssh.host_keys.github }}"
+    state: present
     path: "{{ ssh.known_hosts }}"
-    state: touch
-    mode: "0644"
+
+- name: Discovery tasks
+  ansible.builtin.include_tasks:
+    file: 1password.yml

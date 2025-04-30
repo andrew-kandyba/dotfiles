@@ -3,9 +3,8 @@ Host *
     HashKnownHosts yes
     PubkeyAuthentication yes
     PasswordAuthentication no
+    IdentityAgent {{ ssh.agent.auth_sock }}
 
 Host github.com
     User git
-    IdentityFile {{ ssh.key_path }}
-    IdentitiesOnly yes
     Compression yes

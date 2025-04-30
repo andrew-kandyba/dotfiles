@@ -1,8 +1,13 @@
 ---
 ssh:
   dir: ~/.ssh
+  agent:
+    dir: ~/.1password
+    sock: "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    auth_sock: ~/.1password/agent.sock
   config:
     dest: ~/.ssh/config
     template: templates/config.j2
-  key_path: ~/.ssh/id_ed25519
   known_hosts: ~/.ssh/known_hosts
+  host_keys:
+    github: "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"

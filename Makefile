@@ -16,8 +16,6 @@ vault:
   git:
     name: "Your Name"
     email: "your.email@example.com"
-  ssh:
-    passphrase: "ssh-key-passphrase"
   gpg:
     passphrase: "gpg-key-passphrase"
 endef
@@ -80,7 +78,7 @@ vault: ## Create vault
 	@echo "$$VAULT_TEMPLATE" > ${VAULT}
 	@echo "Vault created. Don't forget to:"
 	@echo "1. Change default password ${VAULT_PASSWORD}"
-	@echo "2. Edit data in ${VAULT}"
+	@echo "2. Update data in ${VAULT}"
 	@echo "3. Run 'make encrypt' to secure the vault"
 	@echo "4. Run 'make play' to run the playbook"
 
