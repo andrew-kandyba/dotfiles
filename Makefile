@@ -16,8 +16,6 @@ vault:
   git:
     name: "Your Name"
     email: "your.email@example.com"
-  gpg:
-    passphrase: "gpg-key-passphrase"
 endef
 export VAULT_TEMPLATE
 

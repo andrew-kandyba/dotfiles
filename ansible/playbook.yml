@@ -5,7 +5,6 @@
   roles:
     - system/brew
     - system/git
-    - system/gpg
     - system/shell
     - system/ssh
     - tools/ghostty
