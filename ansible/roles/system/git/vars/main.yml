@@ -1,6 +1,10 @@
 ---
 git:
   branch: main
+  signing_key: "{{ lookup('pipe', 'ssh-add -L | grep gh_sign') }}"
+  signers:
+    dest: ~/.ssh/allowed_signers
+    template: templates/allowed_signers.j2
   config:
     dest: ~/.gitconfig
     template: templates/.gitconfig.j2
@@ -8,6 +12,6 @@ git:
     dest: ~/.gitignore
     template: templates/.gitignore.j2
   packages:
-    - difftastic
     - git
+    - difftastic
     - git-secrets

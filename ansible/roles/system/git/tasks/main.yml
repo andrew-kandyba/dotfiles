@@ -15,3 +15,9 @@
     src: "{{ git.ignore.template }}"
     dest: "{{ git.ignore.dest }}"
     mode: "0644"
+
+- name: Create allowed_signers
+  ansible.builtin.template:
+    src: "{{ git.signers.template }}"
+    dest: "{{ git.signers.dest }}"
+    mode: "0644"

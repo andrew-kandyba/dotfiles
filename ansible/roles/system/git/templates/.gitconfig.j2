@@ -1,9 +1,16 @@
  [user]
     name = "{{ vault.git.name }}"
     email = "{{ vault.git.email }}"
+    signingkey = "{{ git.signing_key }}"
 [core]
     autocrlf = input
     excludesfile = "{{ git.ignore.dest }}"
+[commit]
+    gpgsign = true
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = "{{ git.signers.dest }}"
 [merge]
     conflictstyle = diff3
     ff = false
