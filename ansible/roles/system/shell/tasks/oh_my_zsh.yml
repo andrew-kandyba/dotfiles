@@ -21,6 +21,7 @@
     cmd: "{{ omz.installer.dest }}"
     executable: /bin/sh
   when: not omz_installed.stat.exists
+  changed_when: not omz_installed.stat.exists
 
 - name: Oh-my-zsh > Check zsh plugins installation status
   ansible.builtin.stat:
