@@ -1,7 +1,6 @@
 ---
 git:
   branch: main
-  signing_key: "{{ lookup('pipe', 'ssh-add -L | grep gh_sign') }}"
   signers:
     dest: ~/.ssh/allowed_signers
     template: templates/allowed_signers.j2

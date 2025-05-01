@@ -16,6 +16,7 @@ vault:
   git:
     name: "Your Name"
     email: "your.email@example.com"
+    signingkey: "your signing key"
 endef
 export VAULT_TEMPLATE
 

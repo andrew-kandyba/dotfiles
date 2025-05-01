@@ -1,7 +1,7 @@
  [user]
     name = "{{ vault.git.name }}"
     email = "{{ vault.git.email }}"
-    signingkey = "{{ git.signing_key }}"
+    signingkey = "{{ vault.git.signingkey }}"
 [core]
     autocrlf = input
     excludesfile = "{{ git.ignore.dest }}"
