@@ -1,12 +1,30 @@
 ---
-- name: Installing cask packages
+- name: Install cask packages
   community.general.homebrew:
-    name: "{{ brew.cask_packages }}"
+    name: "{{ item.packages }}"
     state: present
     install_options: ["cask"]
+  register: brew_result
+  changed_when: >-
+    brew_result.stdout is defined and
+    brew_result.stdout != "" and
+    not "already installed" in brew_result.stdout
+  loop:
+    - { packages: "{{ brew.cask_packages }}", label: "cask packages" }
+    - { packages: "{{ brew.fonts }}", label: "font packages" }
+  loop_control:
+    label: "Installing {{ item.label }}: {{ item.packages | join(', ') | truncate(40) }}"
 
-- name: Installing fonts
+- name: Install regular packages
   community.general.homebrew:
-    name: "{{ brew.fonts }}"
+    name: "{{ item.packages }}"
     state: present
-    install_options: ["cask"]
+  register: brew_reg_result
+  changed_when: >-
+    brew_reg_result.stdout is defined and
+    brew_reg_result.stdout != "" and
+    not "already installed" in brew_reg_result.stdout
+  loop:
+    - { packages: "{{ brew.packages }}", label: "regular packages" }
+  loop_control:
+    label: "Installing {{ item.label }}: {{ item.packages | join(', ') | truncate(40) }}"

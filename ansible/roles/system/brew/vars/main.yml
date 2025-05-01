@@ -3,13 +3,25 @@ brew:
   cask_packages:
     - 1password
     - bruno
+    - deepl
     - docker
     - firefox
     - ghostty
     - phpstorm
     - raycast
     - telegram-desktop
+    - tunnelblick
     - virtualbox
     - zed
+  packages:
+    - bat
+    - docker-compose
+    - fd
+    - fzf
+    - htop
+    - midnight-commander
+    - ripgrep
+    - tlrc
+    - trivy
   fonts:
     - font-fira-code-nerd-font
