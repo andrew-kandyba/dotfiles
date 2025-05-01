@@ -4,8 +4,8 @@
   gather_facts: false
   roles:
     - system/brew
-    - system/git
     - system/shell
     - system/ssh
+    - system/git
     - tools/ghostty
     - tools/zed
