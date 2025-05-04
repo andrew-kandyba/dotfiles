@@ -1,8 +1,4 @@
 ---
-zsh:
-  packages: zsh
-  user: "{{ lookup('env', 'USER') }}"
-
 omz:
   installer:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh

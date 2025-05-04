@@ -1,8 +1,14 @@
 ---
 - name: Installing zsh
   community.general.homebrew:
-    name: "{{ zsh.packages }}"
+    name: "zsh"
     state: present
+
+- name: Disable login banner
+  ansible.builtin.file:
+    path: "~/.hushlogin"
+    state: touch
+    mode: "0644"
 
 - name: Discovery tasks
   ansible.builtin.include_tasks:
