@@ -42,6 +42,25 @@
   loop: "{{ zsh_plugins_status.results }}"
   when: not item.stat.exists
 
+- name: Oh-my-zsh > Check if p10k installed
+  ansible.builtin.stat:
+    path: "{{ omz.themes }}/powerlevel10k"
+  register: p10k_installed
+
+- name: Oh-my-zsh > Clone p10k repository
+  ansible.builtin.git:
+    repo: "{{ p10k.repo }}"
+    dest: "{{ omz.themes }}/powerlevel10k"
+    version: master
+    depth: 1
+  when: not p10k_installed.stat.exists
+
+- name: Oh-my-zsh > Create p10k.zsh configuration
+  ansible.builtin.template:
+    src: "{{ p10k.config.template }}"
+    dest: "{{ p10k.config.dest }}"
+    mode: "0644"
+
 - name: Oh-my-zsh > Create .zshrc
   ansible.builtin.template:
     src: "{{ omz.config.template }}"

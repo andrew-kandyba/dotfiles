@@ -7,3 +7,10 @@ omz:
     dest: ~/.zshrc
     template: templates/.zshrc.j2
   plugins: "~/.oh-my-zsh/custom/plugins"
+  themes: "~/.oh-my-zsh/custom/themes"
+
+p10k:
+  repo: https://github.com/romkatv/powerlevel10k.git
+  config:
+    dest: ~/.p10k.zsh
+    template: templates/.p10k.zsh.j2
