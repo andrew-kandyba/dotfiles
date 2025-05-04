@@ -19,7 +19,6 @@ brew:
     - fd
     - fzf
     - htop
-    - midnight-commander
     - ripgrep
     - tlrc
     - trivy
