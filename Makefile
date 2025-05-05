@@ -32,37 +32,72 @@ play: ## Run playbook
 
 reset: ## Reset system to initial state
 	@echo "Resetting system..."
-	@echo "Uninstalling brew packages..."
+	@echo "Checking if yq is installed..."
+	-@which yq >/dev/null || (echo "Installing yq..." && brew install yq)
 
-	-@for pkg in $$(grep -E '^\s*-' ansible/roles/system/brew/vars/main.yml | sed 's/.*-\s*//' | tr -d '"' | tr -d "'"); do \
+	@echo "Uninstalling brew packages..."
+	-@for pkg in $$(yq e '.brew.cask_packages[]' ansible/roles/system/brew/vars/main.yml); do \
 		echo "Uninstalling cask: $$pkg"; \
 		brew uninstall --force --cask "$$pkg" || true; \
 	done
 
-	-@for pkg in $$(grep -E '^\s*-' ansible/roles/system/git/vars/main.yml | sed 's/.*-\s*//' | tr -d '"' | tr -d "'"); do \
+	-@for pkg in $$(yq e '.brew.packages[]' ansible/roles/system/brew/vars/main.yml); do \
 		echo "Uninstalling formula: $$pkg"; \
 		brew uninstall --force "$$pkg" || true; \
 	done
 
-	-@for pkg in zsh gnupg pinentry-mac telegram-desktop font-fira-code-nerd-font; do \
-		echo "Uninstalling formula: $$pkg"; \
+	-@for pkg in $$(yq e '.brew.fonts[]' ansible/roles/system/brew/vars/main.yml); do \
+		echo "Uninstalling font: $$pkg"; \
+		brew uninstall --force --cask "$$pkg" || true; \
+	done
+
+	-@for pkg in $$(yq e '.git.packages[]' ansible/roles/system/git/vars/main.yml); do \
+		echo "Uninstalling git package: $$pkg"; \
 		brew uninstall --force "$$pkg" || true; \
 	done
+
+	@echo "Removing shell configuration..."
+	-@rm -f $$HOME/.zshrc
+	-@rm -f $$HOME/.p10k.zsh
+	-@rm -f $$HOME/.hushlogin
+	-@[ -f $$HOME/.oh-my-zsh/tools/uninstall.sh ] && $$HOME/.oh-my-zsh/tools/uninstall.sh || true
+	-@rm -rf $$HOME/.oh-my-zsh # На випадок, якщо скрипт деінсталяції не видалив каталог
 
 	@echo "Removing configuration files..."
 	-@rm -f $$HOME/.gitconfig
 	-@rm -f $$HOME/.gitignore
-	-@rm -f $$HOME/.zshrc
+	-@rm -f $$HOME/.ssh/allowed_signers
+	-@rm -f $$HOME/.ssh/config
+	-@ssh-keygen -R github.com # Видаляє github.com з known_hosts
+
+	@echo "Removing tool configurations..."
 	-@rm -rf $$HOME/.config/ghostty
 	-@rm -rf $$HOME/.config/zed
+	-@rm -rf $$HOME/.1password
+	-@launchctl unload ~/Library/LaunchAgents/com.1password.SSH* 2>/dev/null || true
 
-	@echo "Cleaning up SSH and GPG configurations..."
-	-@rm -f $$HOME/.ssh/config
-	-@rm -f $$HOME/.ssh/id_ed25519*
-	-@rm -rf $$HOME/.gnupg
+	@echo "Restoring macOS defaults..."
+	-@defaults delete NSGlobalDomain NSAutomaticSpellingCorrectionEnabled 2>/dev/null || true
+	-@defaults delete NSGlobalDomain KeyRepeat 2>/dev/null || true
+	-@defaults delete NSGlobalDomain InitialKeyRepeat 2>/dev/null || true
+	-@defaults delete com.apple.controlcenter.plist BatteryShowPercentage 2>/dev/null || true
+	-@defaults delete com.apple.controlcenter.plist BatteryModule 2>/dev/null || true
+	-@defaults delete com.apple.dock autohide 2>/dev/null || true
+	-@defaults delete com.apple.dock tilesize 2>/dev/null || true
+	-@defaults delete com.apple.dock magnification 2>/dev/null || true
+	-@defaults delete com.apple.dock largesize 2>/dev/null || true
+	-@defaults delete NSGlobalDomain com.apple.swipescrolldirection 2>/dev/null || true
+	-@defaults delete NSGlobalDomain AppleShowAllExtensions 2>/dev/null || true
+	-@defaults delete com.apple.finder AppleShowAllFiles 2>/dev/null || true
+	-@defaults delete com.apple.finder ShowPathbar 2>/dev/null || true
+	-@defaults delete com.apple.finder ShowRecentTags 2>/dev/null || true
+	-@defaults delete com.apple.finder NewWindowTargetPath 2>/dev/null || true
+	-@defaults delete com.apple.finder FXDefaultSearchScope 2>/dev/null || true
+	-@killall Dock Finder SystemUIServer 2>/dev/null || true
 
-	@echo "Uninstalling Oh My Zsh..."
-	-@[ -f ${OMZSH_UNINSTALL} ] && ${OMZSH_UNINSTALL} || true
+
+	-@rm -rf $$HOME/.cache/p10k-* 2>/dev/null || true
+	-@rm -f $$HOME/.ansible.log 2>/dev/null || true
 
 	@echo "Uninstalling Homebrew..."
 	-@which brew >/dev/null && /bin/bash -c "$$(curl -fsSL ${BREW_UNINSTALL})" || true
