@@ -7,5 +7,6 @@
     - system/shell
     - system/ssh
     - system/git
+    - system/macos
     - tools/ghostty
     - tools/zed

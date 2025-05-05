@@ -1,0 +1,18 @@
+---
+macos:
+  settings:
+    battery:
+      show_percent: true
+      show_in_menu: true
+    dock:
+      tilesize: 48
+      largesize: 64
+      autohide: true
+      magnification: true
+    scroll:
+      natural: false
+    finder:
+      show_all_extensions: true
+      show_hidden_files: true
+      show_path_bar: true
+      show_recent_tags: false

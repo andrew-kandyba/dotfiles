@@ -1,0 +1,70 @@
+---
+- name: MacOS > Disable auto spelling correction
+  ansible.builtin.command: defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+  changed_when: false
+
+- name: MacOS > Set key repeat rate (faster response)
+  ansible.builtin.command: defaults write NSGlobalDomain KeyRepeat -int 2
+  changed_when: false
+
+- name: MacOS > Set initial key repeat delay (shorter delay)
+  ansible.builtin.command: defaults write NSGlobalDomain InitialKeyRepeat -int 15
+  changed_when: false
+
+- name: MacOS > Show percentage (battery)
+  ansible.builtin.command: defaults write com.apple.controlcenter.plist BatteryShowPercentage -bool {{ macos.settings.battery.show_percent | lower }}
+  changed_when: false
+
+- name: MacOS > Show battery in menu bar (battery)
+  ansible.builtin.command: defaults write com.apple.controlcenter.plist BatteryModule -int 18
+  when: macos.settings.battery.show_in_menu
+  changed_when: false
+
+- name: MacOS > Enable autohide (dock)
+  ansible.builtin.command: defaults write com.apple.dock autohide -bool {{ macos.settings.dock.autohide | lower }}
+  changed_when: false
+
+- name: MacOS > Set icon size (dock)
+  ansible.builtin.command: defaults write com.apple.dock tilesize -int {{ macos.settings.dock.tilesize }}
+  changed_when: false
+
+- name: MacOS > Enable magnification effect for icons (dock)
+  ansible.builtin.command: defaults write com.apple.dock magnification -bool {{ macos.settings.dock.magnification | lower }}
+  changed_when: false
+
+- name: MacOS > Set magnified icon size (dock)
+  ansible.builtin.command: defaults write com.apple.dock largesize -int {{ macos.settings.dock.largesize }}
+  changed_when: false
+
+- name: MacOS > Configure direction (scroll)
+  ansible.builtin.command: defaults write NSGlobalDomain com.apple.swipescrolldirection -bool {{ macos.settings.scroll.natural | lower }}
+  changed_when: false
+
+- name: MacOS > Show file extensions (finder)
+  ansible.builtin.command: defaults write NSGlobalDomain AppleShowAllExtensions -bool {{ macos.settings.finder.show_all_extensions | lower }}
+  changed_when: false
+
+- name: MacOS > Show hidden files (finder)
+  ansible.builtin.command: defaults write com.apple.finder AppleShowAllFiles -bool {{ macos.settings.finder.show_hidden_files | lower }}
+  changed_when: false
+
+- name: MacOS > Show path bar (finder)
+  ansible.builtin.command: defaults write com.apple.finder ShowPathbar -bool {{ macos.settings.finder.show_path_bar | lower }}
+  changed_when: false
+
+- name: MacOS > Hide tags in sidebar (finder)
+  ansible.builtin.command: defaults write com.apple.finder ShowRecentTags -bool {{ macos.settings.finder.show_recent_tags | lower }}
+  changed_when: false
+
+- name: MacOS > New windows to open home directory (finder)
+  ansible.builtin.command: defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/"
+  changed_when: false
+
+- name: MacOS > Search in current folder by default
+  ansible.builtin.command: defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+  changed_when: false
+
+- name: MacOS > Restart services to apply changes
+  ansible.builtin.command: killall Dock Finder SystemUIServer
+  changed_when: true
+  failed_when: false
