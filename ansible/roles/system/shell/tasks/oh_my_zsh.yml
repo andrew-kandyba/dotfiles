@@ -23,7 +23,7 @@
   when: not omz_installed.stat.exists
   changed_when: not omz_installed.stat.exists
 
-- name: Oh-my-zsh > Check zsh plugins installation status
+- name: Oh-my-zsh > Check plugins installation status
   ansible.builtin.stat:
     path: "{{ omz.plugins }}/{{ item.name }}"
   loop:
@@ -33,7 +33,7 @@
     - { name: "zsh-completions", repo: "https://github.com/zsh-users/zsh-completions.git" }
   register: zsh_plugins_status
 
-- name: Oh-my-zsh > Install ZSH plugins
+- name: Oh-my-zsh > Install plugins
   ansible.builtin.git:
     repo: "{{ item.item.repo }}"
     dest: "{{ omz.plugins }}/{{ item.item.name }}"
@@ -42,18 +42,21 @@
   loop: "{{ zsh_plugins_status.results }}"
   when: not item.stat.exists
 
-- name: Oh-my-zsh > Check if p10k installed
+- name: Oh-my-zsh > Check themes installation status
   ansible.builtin.stat:
-    path: "{{ omz.themes }}/powerlevel10k"
-  register: p10k_installed
+    path: "{{ omz.themes }}/{{ item.name }}"
+  loop:
+    - { name: "powerlevel10k", repo: "https://github.com/romkatv/powerlevel10k.git" }
+  register: zsh_themes_status
 
-- name: Oh-my-zsh > Clone p10k repository
+- name: Oh-my-zsh > Install themes
   ansible.builtin.git:
-    repo: "{{ p10k.repo }}"
-    dest: "{{ omz.themes }}/powerlevel10k"
+    repo: "{{ item.item.repo }}"
+    dest: "{{ omz.themes }}/{{ item.item.name }}"
     version: master
     depth: 1
-  when: not p10k_installed.stat.exists
+  loop: "{{ zsh_themes_status.results }}"
+  when: not item.stat.exists
 
 - name: Oh-my-zsh > Create p10k.zsh configuration
   ansible.builtin.template:
