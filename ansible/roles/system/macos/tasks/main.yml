@@ -57,14 +57,48 @@
   changed_when: false
 
 - name: MacOS > New windows to open home directory (finder)
-  ansible.builtin.command: defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/"
+  ansible.builtin.command: defaults write com.apple.finder NewWindowTargetPath -string "{{ macos.settings.finder.new_window }}"
   changed_when: false
 
-- name: MacOS > Search in current folder by default
-  ansible.builtin.command: defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+- name: MacOS > Set default view to list (finder)
+  ansible.builtin.command: defaults write com.apple.finder FXPreferredViewStyle -string "{{ macos.settings.finder.view_style }}"
+  changed_when: false
+
+- name: MacOS > Search in current folder by default (finder)
+  ansible.builtin.command: defaults write com.apple.finder FXDefaultSearchScope -string "{{ macos.settings.finder.search_scope }}"
+  changed_when: false
+
+- name: MacOS > Show full path in title bar (finder)
+  ansible.builtin.command: defaults write com.apple.finder _FXShowPosixPathInTitle -bool {{ macos.settings.finder.show_path_in_title | lower }}
+  changed_when: false
+
+- name: MacOS > Mute startup chime
+  ansible.builtin.command: sudo nvram StartupMute=%01
+  changed_when: false
+
+- name: MacOS > Set Touch Bar to show F1–F12 keys by default
+  ansible.builtin.command: defaults write com.apple.touchbar.agent PresentationModeGlobal -string "{{ macos.settings.touchbar.mode }}"
+  changed_when: false
+
+- name: MacOS > Prevent .DS_Store on network drives
+  ansible.builtin.command: defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool {{ macos.settings.ds_store.disable_on_network | lower }}
+  changed_when: false
+
+- name: MacOS > Prevent .DS_Store on USB drives
+  ansible.builtin.command: defaults write com.apple.desktopservices DSDontWriteUSBStores -bool {{ macos.settings.ds_store.disable_on_usb | lower }}
+  changed_when: false
+
+- name: MacOS > Enable firewall (security)
+  ansible.builtin.command: sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+  when: macos.settings.security.firewall | bool
+  changed_when: false
+
+- name: MacOS > Enable firewall stealth mode (security)
+  ansible.builtin.command: sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+  when: macos.settings.security.firewall_stealth | bool
   changed_when: false
 
 - name: MacOS > Restart services to apply changes
-  ansible.builtin.command: killall Dock Finder SystemUIServer
+  ansible.builtin.command: killall socketfilterfw Dock Finder ControlStrip SystemUIServer
   changed_when: true
   failed_when: false

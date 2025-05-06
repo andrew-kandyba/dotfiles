@@ -4,6 +4,8 @@ macos:
     battery:
       show_percent: true
       show_in_menu: true
+    touchbar:
+      mode: "functionKeys"
     dock:
       tilesize: 48
       largesize: 64
@@ -16,3 +18,13 @@ macos:
       show_hidden_files: true
       show_path_bar: true
       show_recent_tags: false
+      show_path_in_title: true
+      view_style: "Nlsv"
+      search_scope: "SCcf"
+      new_window: "file://$HOME/"
+    ds_store:
+      disable_on_network: true
+      disable_on_usb: true
+    security:
+      firewall: true
+      firewall_stealth: true
