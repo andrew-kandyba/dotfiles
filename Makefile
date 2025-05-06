@@ -106,15 +106,14 @@ reset: ## Reset system to initial state
 
 vault: ## Create vault
 	@echo "Creating vault..."
-	@echo "vault-secure-password" > ${VAULT_PASSWORD}
+	@openssl rand -base64 32 > ${VAULT_PASSWORD}
 	@chmod 600 ${VAULT_PASSWORD}
 	@mkdir -p ansible/inventories/home/group_vars
 	@echo "$$VAULT_TEMPLATE" > ${VAULT}
 	@echo "Vault created. Don't forget to:"
-	@echo "1. Change default password ${VAULT_PASSWORD}"
-	@echo "2. Update data in ${VAULT}"
-	@echo "3. Run 'make encrypt' to secure the vault"
-	@echo "4. Run 'make play' to run the playbook"
+	@echo "1. Update data in ${VAULT}"
+	@echo "2. Run 'make encrypt' to secure the vault"
+	@echo "3. Run 'make play' to run the playbook"
 
 encrypt: ## Encrypt vault
 	@[ ! -f ${VAULT_PASSWORD} ] && echo ${VAULT_PASSWORD_UNDEFINED} && exit 1 || exit 0;
