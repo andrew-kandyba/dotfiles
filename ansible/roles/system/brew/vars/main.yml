@@ -4,7 +4,6 @@ brew:
     - 1password
     - bruno
     - deepl
-    - docker
     - firefox
     - ghostty
     - phpstorm
@@ -15,6 +14,8 @@ brew:
     - zed
   packages:
     - bat
+    - colima
+    - docker
     - docker-compose
     - fd
     - fzf
