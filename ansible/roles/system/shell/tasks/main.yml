@@ -1,14 +1,20 @@
 ---
-- name: Installing zsh
-  community.general.homebrew:
-    name: "zsh"
-    state: present
+- name: Check if hushlogin file exists
+  ansible.builtin.stat:
+    path: "~/.hushlogin"
+  register: hushlogin_stat
 
 - name: Disable login banner
   ansible.builtin.file:
     path: "~/.hushlogin"
     state: touch
     mode: "0644"
+  when: not hushlogin_stat.stat.exists
+
+- name: Installing zsh
+  community.general.homebrew:
+    name: "zsh"
+    state: present
 
 - name: Discovery tasks
   ansible.builtin.include_tasks:
