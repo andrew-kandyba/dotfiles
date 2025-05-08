@@ -21,6 +21,7 @@ brew:
     - fzf
     - htop
     - ripgrep
+    - thefuck
     - tlrc
     - trivy
   fonts:
