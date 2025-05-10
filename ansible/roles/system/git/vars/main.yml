@@ -7,9 +7,6 @@ git:
   config:
     dest: ~/.gitconfig
     template: templates/.gitconfig.j2
-  ignore:
-    dest: ~/.gitignore
-    template: templates/.gitignore.j2
   packages:
     - git
     - difftastic

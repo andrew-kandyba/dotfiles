@@ -1,18 +1,18 @@
 ---
 - name: Ensure config directory exists
   ansible.builtin.file:
-    path: "{{ zed.config.homedir }}"
+    path: "~/.config/zed"
     state: directory
     mode: "0700"
 
-- name: Create settings.json
-  ansible.builtin.template:
-    src: "{{ zed.config.template }}"
-    dest: "{{ zed.config.dest }}"
+- name: Copy settings.json
+  ansible.builtin.copy:
+    src: "settings.json"
+    dest: "~/.config/zed/settings.json"
     mode: "0644"
 
-- name: Create keymap.json
-  ansible.builtin.template:
-    src: "{{ zed.keymap.template }}"
-    dest: "{{ zed.keymap.dest }}"
+- name: Copy keymap.json
+  ansible.builtin.copy:
+    src: "keymap.json"
+    dest: "~/.config/zed/keymap.json"
     mode: "0644"

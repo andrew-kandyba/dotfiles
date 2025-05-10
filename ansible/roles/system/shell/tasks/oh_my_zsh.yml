@@ -58,14 +58,14 @@
   loop: "{{ zsh_themes_status.results }}"
   when: not item.stat.exists
 
-- name: Oh-my-zsh > Create p10k.zsh configuration
-  ansible.builtin.template:
-    src: "{{ p10k.config.template }}"
-    dest: "{{ p10k.config.dest }}"
+- name: Oh-my-zsh > Copy p10k.zsh configuration
+  ansible.builtin.copy:
+    src: ".p10k.zsh"
+    dest: "~/.p10k.zsh"
     mode: "0644"
 
-- name: Oh-my-zsh > Create .zshrc
-  ansible.builtin.template:
-    src: "{{ omz.config.template }}"
-    dest: "{{ omz.config.dest }}"
+- name: Oh-my-zsh > Copy .zshrc
+  ansible.builtin.copy:
+    src: ".zshrc"
+    dest: "~/.zshrc"
     mode: "0644"

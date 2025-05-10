@@ -3,13 +3,5 @@ omz:
   installer:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: /tmp/omz_installer.sh
-  config:
-    dest: ~/.zshrc
-    template: templates/.zshrc.j2
   plugins: "~/.oh-my-zsh/custom/plugins"
   themes: "~/.oh-my-zsh/custom/themes"
-
-p10k:
-  config:
-    dest: ~/.p10k.zsh
-    template: templates/.p10k.zsh.j2

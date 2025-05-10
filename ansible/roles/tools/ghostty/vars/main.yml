@@ -1,5 +1,0 @@
----
-ghostty:
-  config:
-    dest: ~/.config/ghostty/config
-    template: templates/config.j2
